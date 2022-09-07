@@ -1,4 +1,4 @@
-from module.nodo import Nodo
+from Ejercicio1.module.Nodo import Nodo
 
 class Lista:
     
@@ -112,4 +112,3 @@ class Lista:
             siguienteTemp.anterior = anteriorTemp
              
             return temp
-        
