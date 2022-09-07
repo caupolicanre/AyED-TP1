@@ -1,4 +1,4 @@
-from Ejercicio1.module.lista import Lista
+from Ejercicio1.module.ListaDoble import Lista
 
 class ColaDoble (Lista):
     
