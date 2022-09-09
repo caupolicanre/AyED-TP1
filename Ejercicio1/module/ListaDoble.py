@@ -1,4 +1,4 @@
-from Ejercicio1.module.Nodo import Nodo
+from nodo import Nodo
 
 class Lista:
     

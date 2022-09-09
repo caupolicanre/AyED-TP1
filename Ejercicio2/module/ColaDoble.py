@@ -1,8 +1,8 @@
-from Ejercicio1.module.ListaDoble import Lista
+from ListaDoble import Lista
 
-class ColaDoble (Lista):
+class ColaDoble(Lista):
     
-    def  encolar(self,item):
+    def encolar(self,item):
         Lista.agregar(item)
         
     def desencolar(self):
