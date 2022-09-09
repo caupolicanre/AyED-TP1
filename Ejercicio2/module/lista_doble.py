@@ -1,6 +1,6 @@
 from nodo import Nodo
 
-class Lista:
+class ListaDoble:
     
     def __init__(self):
         self.cabeza = None
