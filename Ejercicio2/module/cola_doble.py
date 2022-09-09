@@ -1,4 +1,5 @@
 from lista_doble import ListaDoble
+from carta import Carta
 
 class ColaDoble(ListaDoble):
     
