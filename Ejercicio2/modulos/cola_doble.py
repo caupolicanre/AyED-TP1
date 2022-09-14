@@ -1,4 +1,4 @@
-from lista_doble import ListaDoble
+from Ejercicio1.module.lista_doble import ListaDoble
 from carta import Carta
 
 class ColaDoble(ListaDoble):
@@ -8,3 +8,6 @@ class ColaDoble(ListaDoble):
         
     def desencolar(self):
         ListaDoble.extraer(ListaDoble.tamanio-1)
+
+pruebaColaDoble= ColaDoble()
+print(pruebaColaDoble.esta_vacia())
