@@ -4,6 +4,9 @@ class Nodo:
         self.siguiente = None
         self.anterior = None
     
+    def __str__(self):
+        return str(self.dato)
+    
     @property
     def dato(self):
         return self._dato
@@ -65,9 +68,9 @@ class ListaDobleEnlazada:
         return self.tamanio == 0
     
     
-    def agregar(self, item):
+   def agregar(self, item):
         temp = Nodo(item)
-        self._tamanio+=1
+        
         
         if self.esta_vacia():
             self.cabeza = temp
@@ -76,11 +79,11 @@ class ListaDobleEnlazada:
             temp.siguiente = self.cabeza   # Asigno al nuevo nodo el atributo de siguiente con el valor de la cabeza
             self.cabeza.anterior = temp    # Asigno al nodo de la cabeza el atributo de anterior con el valor del nodo nuevo
             self.cabeza = temp             # Actualizo la cabeza con el nodo nuevo
-    
+        
+        self._tamanio+=1
     
     def anexar(self, item):
         temp = Nodo(item)
-        self._tamanio+=1
         
         if self.esta_vacia():
             self.cabeza = temp
@@ -89,6 +92,8 @@ class ListaDobleEnlazada:
             temp.anterior = self.cola
             self.cola.siguiente = temp
             self.cola = temp
+            
+        self._tamanio+=1
 
 
     def insertar(self, posicion, item):
@@ -141,3 +146,23 @@ class ListaDobleEnlazada:
             siguienteTemp.anterior = anteriorTemp
              
             return temp
+    
+    
+    def concatenar(self,lista):
+        temp = lista.cabeza
+        
+        for i in range(lista.tamanio):
+            self.anexar(temp)
+            temp= temp.siguiente
+     
+        return self
+
+
+
+
+
+
+lista1=ListaDoble()
+lista1.anexar("1")
+print(lista1.esta_vacia())
+    
