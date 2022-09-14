@@ -1,4 +1,4 @@
-from Ejercicio1.module.lista_doble import ListaDoble
+from modulos.LDE import ListaDoble
 from carta import Carta
 
 class ColaDoble(ListaDoble):
