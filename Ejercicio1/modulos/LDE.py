@@ -1,5 +1,5 @@
 class Nodo:
-    def __init__(self,datoInicial):
+    def __init__(self, datoInicial):
         self.dato = datoInicial
         self.siguiente = None
         self.anterior = None
@@ -12,7 +12,7 @@ class Nodo:
         return self._dato
     
     @dato.setter
-    def dato(self,nuevoDato):
+    def dato(self, nuevoDato):
         self._dato = nuevoDato
     
     @property
@@ -20,7 +20,7 @@ class Nodo:
         return self._anterior
         
     @anterior.setter
-    def anterior(self,nuevoAnterior):
+    def anterior(self, nuevoAnterior):
         self._anterior = nuevoAnterior
     
     @property
@@ -28,18 +28,25 @@ class Nodo:
         return self._siguiente
     
     @siguiente.setter
-    def siguiente(self,nuevoSiguiente):
+    def siguiente(self, nuevoSiguiente):
         self._siguiente = nuevoSiguiente
 
 
 class ListaDobleEnlazada:
     
     def __init__(self):
+        '''Atributos de la Lista Doble Enlazada'''
         self.cabeza = None
         self.cola = None
-        self._tamanio = 0
+        self._tamanio = 0   # Contador para el tamaño de la lista
     
+    def __str__(self):
+        None
+
+    def __repr__(self):
+        return str(self)
     
+
     # Propiedades
     
     @property
@@ -62,25 +69,26 @@ class ListaDobleEnlazada:
     def tamanio(self):
         return self._tamanio
         
+
     
-    
+    # Métodos / Funciones
+
     def esta_vacia(self):
         return self.tamanio == 0
     
     
-   def agregar(self, item):
-        temp = Nodo(item)
-        
+    def agregar(self, item):
+        nuevoNodo = Nodo(item)
         
         if self.esta_vacia():
-            self.cabeza = temp
-            self.cola = temp
+            self.cabeza = nuevoNodo
+            self.cola = nuevoNodo
         else:
-            temp.siguiente = self.cabeza   # Asigno al nuevo nodo el atributo de siguiente con el valor de la cabeza
-            self.cabeza.anterior = temp    # Asigno al nodo de la cabeza el atributo de anterior con el valor del nodo nuevo
-            self.cabeza = temp             # Actualizo la cabeza con el nodo nuevo
+            nuevoNodo.siguiente = self.cabeza   # Asigno al nuevo nodo el atributo de siguiente con el valor de la cabeza
+            self.cabeza.anterior = nuevoNodo    # Asigno al nodo de la cabeza el atributo de anterior con el valor del nodo nuevo
+            self.cabeza = nuevoNodo             # Actualizo la cabeza con el nodo nuevo
         
-        self._tamanio+=1
+        self._tamanio+=1    # Sumamos 1 al contador del tamaño de la lista. IMPORTANTE: si actualizamos el contador al inicio de la función, no anda, hay que hacerlo al inicio
     
     def anexar(self, item):
         temp = Nodo(item)
@@ -160,9 +168,10 @@ class ListaDobleEnlazada:
 
 
 
+# Pruebas
 
+lista1=ListaDobleEnlazada()
+lista2=ListaDobleEnlazada()
 
-lista1=ListaDoble()
-lista1.anexar("1")
 print(lista1.esta_vacia())
     
