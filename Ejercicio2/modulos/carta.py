@@ -8,6 +8,11 @@ class Carta(Nodo):
         self.boca_abajo = None
         self.boca_arriba = None
     
+    def __str__(self):
+        return str(self._palo + " " + self._numero)
+    
+    def __repr__(self):
+        return str(self)
 
     # Propiedades
     
