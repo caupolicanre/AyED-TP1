@@ -41,7 +41,8 @@ class ListaDobleEnlazada:
         self._tamanio = 0   # Contador para el tamaño de la lista
     
     def __str__(self):
-        None
+        lista = [str(Nodo) for Nodo in self]    # Preguntar si se puede utilizar esta lista en el TP
+        return str(lista)
 
     def __repr__(self):
         return str(self)
