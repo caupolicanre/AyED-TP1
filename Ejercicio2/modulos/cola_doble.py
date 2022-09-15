@@ -1,4 +1,4 @@
-from modulos.LDE import ListaDobleEnlazada
+from Ejercicio1.modulos.LDE import ListaDobleEnlazada
 from carta import Carta
 
 class ColaDoble(ListaDobleEnlazada):
