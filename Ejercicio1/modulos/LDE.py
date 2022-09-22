@@ -1,8 +1,9 @@
+
 class Nodo:
     def __init__(self, datoInicial):
-        self.dato = datoInicial
-        self.siguiente = None
-        self.anterior = None
+        self._dato = datoInicial
+        self._siguiente = None
+        self._anterior = None
     
     def __str__(self):
         return str(self.dato)
@@ -41,12 +42,23 @@ class ListaDobleEnlazada:
         self._tamanio = 0   # Contador para el tamaño de la lista
     
     def __str__(self):
-        lista = [str(Nodo) for Nodo in self]    # Preguntar si se puede utilizar esta lista en el TP
-        return str(lista)
+        #lista = [str(Nodo) for Nodo in self]    # Preguntar si se puede utilizar esta lista en el TP
+        for Nodo in self:
+            print(str(Nodo))
 
     def __repr__(self):
         return str(self)
     
+    def __iter__(self):
+        nodo = self.cabeza
+
+        while nodo:
+            yield nodo
+            nodo = nodo.siguiente
+    
+    def __add__(self):
+        return self.concatenar()
+
 
     # Propiedades
     
@@ -92,29 +104,29 @@ class ListaDobleEnlazada:
         self._tamanio+=1    # Sumamos 1 al contador del tamaño de la lista. IMPORTANTE: si actualizamos el contador al inicio de la función, no anda, hay que hacerlo al inicio
     
     def anexar(self, item):
-        temp = Nodo(item)
+        nuevoNodo = Nodo(item)
         
         if self.esta_vacia():
-            self.cabeza = temp
-            self.cola = temp
+            self.cabeza = nuevoNodo
+            self.cola = nuevoNodo
         else:
-            temp.anterior = self.cola
-            self.cola.siguiente = temp
-            self.cola = temp
+            nuevoNodo.anterior = self.cola
+            self.cola.siguiente = nuevoNodo
+            self.cola = nuevoNodo
             
         self._tamanio+=1
 
 
     def insertar(self, posicion, item):
         
-        if posicion < 0 or posicion > self.tamanio:
+        if posicion < 0 or posicion >= self.tamanio:
             raise IndexError()
         
         
         if posicion == 0:
             self.agregar(item)
             
-        elif posicion == self.tamanio:
+        elif posicion == self.tamanio-1:
             self.anexar(item)
             
         else:
@@ -122,7 +134,7 @@ class ListaDobleEnlazada:
             
             temp = self.cabeza
             
-            for i in range(0,posicion-1):
+            for i in range(posicion):
                 temp = temp.siguiente
                 
             siguienteTemp = temp.siguiente
@@ -157,12 +169,12 @@ class ListaDobleEnlazada:
             return temp
     
     
-    def concatenar(self,lista):
+    def concatenar(self, lista):
         temp = lista.cabeza
         
         for i in range(lista.tamanio):
-            self.anexar(temp)
-            temp= temp.siguiente
+            self.anexar(temp.dato)
+            temp = temp.siguiente
      
         return self
 
@@ -170,9 +182,17 @@ class ListaDobleEnlazada:
 
 
 # Pruebas
+if __name__ == "__main__":
 
-lista1=ListaDobleEnlazada()
-lista2=ListaDobleEnlazada()
+    lista1=ListaDobleEnlazada()
+    lista2=ListaDobleEnlazada()
 
-print(lista1.esta_vacia())
+    lista2.agregar(1)
+    lista2.agregar(2)
+    lista2.agregar(3)
+
+    lista2.anexar(8)
+    lista2.anexar(9)
+
+    print(lista1.esta_vacia())
     
