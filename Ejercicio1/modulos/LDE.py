@@ -1,5 +1,6 @@
 
 class Nodo:
+    '''asd'''
     def __init__(self, datoInicial):
         self._dato = datoInicial
         self._siguiente = None
@@ -7,6 +8,9 @@ class Nodo:
     
     def __str__(self):
         return str(self.dato)
+
+    def __repr__(self):
+        return str(self)
     
     @property
     def dato(self):
@@ -44,7 +48,8 @@ class ListaDobleEnlazada:
     def __str__(self):
         #lista = [str(Nodo) for Nodo in self]    # Preguntar si se puede utilizar esta lista en el TP
         for Nodo in self:
-            print(str(Nodo))
+            return str(Nodo)
+        
 
     def __repr__(self):
         return str(self)
@@ -195,4 +200,5 @@ if __name__ == "__main__":
     lista2.anexar(9)
 
     print(lista1.esta_vacia())
-    
+
+    print(lista2)
