@@ -78,7 +78,8 @@ class ListaDobleEnlazada:
     
     
     def __str__(self):
-        '''Retorna una lista de los Nodos dentro de la Lista Doble Enlazada'''
+        '''Retorna una lista de los Nodos dentro 
+        de la Lista Doble Enlazada'''
         
         return str([nodo.dato for nodo in self])
     
@@ -107,7 +108,7 @@ class ListaDobleEnlazada:
     # Métodos / Funciones
 
     def esta_vacia(self):
-        return self.tamanio == 0
+        return self._tamanio == 0
     
     
     def agregar(self, item):
@@ -140,14 +141,14 @@ class ListaDobleEnlazada:
 
     def insertar(self, posicion, item):
         
-        if posicion < 0 or posicion >= self.tamanio:
+        if posicion < 0 or posicion >= self._tamanio:
             raise IndexError()
         
         
         if posicion == 0:
             self.agregar(item)
             
-        elif posicion == self.tamanio:
+        elif posicion == self._tamanio-1:
             self.anexar(item)
             
         else:
@@ -168,35 +169,35 @@ class ListaDobleEnlazada:
     
     def extraer(self, posicion=-1):
         
-        if -1 > posicion or posicion >= self._tamanio:
+        if posicion < -1 or posicion >= self._tamanio:
             raise IndexError
         
         if posicion==-1 or posicion==self.tamanio-1:
             temp = self.cola
-            self.cola.anterior.siguiente = None # Corto el enlace del nodo anterior a la cola, y luego lo convierto en la nueva cola
-            self.cola = self.cola.anterior
+            self.cola = temp.anterior
+            
+            self._tamanio-=1
             return temp
             
         elif posicion == 0:
             temp = self.cabeza
-            self.cabeza.siguiente.anterior = None
-            self.cabeza = self.cabeza.siguiente
+            self.cabeza = temp.siguiente
+            
+            self._tamanio-=1
             return temp
         
         else:
             temp = self.cabeza
             
-            for nodo in range(posicion):
+            for i in range(posicion):
                 temp = temp.siguiente
             
             temp.anterior.siguiente = temp.siguiente
+            temp.anterior = temp.siguiente
             
-            if temp.siguiente != None:
-                temp.siguiente.anterior = temp.anterior
-             
+            self._tamanio-=1
             return temp
         
-        self._tamanio-=1
     
     
     def concatenar(self, lista):
@@ -230,8 +231,17 @@ if __name__ == "__main__":
     
     # Muestro la lista 2 antes y después de insertarle un elemento
     print(lista2)
-    lista2.insertar(3, "Fito Paez") # Se inserta en el item en la posición 3
+    lista2.insertar(3, "Fito Paez") # Se inserta el item en el índice 3
     print(lista2)
+    
+    print("\nInserto al inicio de la lista 2:")
+    lista2.insertar(0, "dou") # Se inserta en el item en la posición 3
+    print(lista2)
+    
+    print("\nInserto al final de la lista 2:")
+    lista2.insertar(lista2.tamanio-1, "uod") # Se inserta en el item en la posición 3
+    print(lista2)
+
 
 
     #Muestro las 2 listas y pregunto si están vacías
