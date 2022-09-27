@@ -20,32 +20,10 @@ class Nodo:
     
     @property
     def dato(self):
-        '''
-        
-
-        Returns
-        -------
-        TYPE
-            DESCRIPTION.
-
-        '''
         return self._dato
     
     @dato.setter
     def dato(self, nuevoDato):
-        '''
-        
-
-        Parameters
-        ----------
-        nuevoDato : TYPE
-            DESCRIPTION.
-
-        Returns
-        -------
-        None.
-
-        '''
         self._dato = nuevoDato
     
     @property
@@ -74,8 +52,33 @@ class ListaDobleEnlazada:
         self.cola = None
         self._tamanio = 0   # Contador para el tamaño de la lista
     
+    
+    # Propiedades
+    
+    @property
+    def cabeza(self):
+        return self._cabeza
+    
+    @cabeza.setter
+    def cabeza(self, nuevaCabeza):
+        self._cabeza = nuevaCabeza
+        
+    @property
+    def cola(self):
+        return self._cola
+    
+    @cola.setter
+    def cola(self, nuevaCola):
+        self._cola = nuevaCola
+        
+    @property
+    def tamanio(self):
+        return self._tamanio
+    
+    
+    
     def __str__(self):
-        '''Retorna '''
+        '''Retorna una lista de los Nodos dentro de la Lista Doble Enlazada'''
         
         return str([nodo.dato for nodo in self])
     
@@ -99,30 +102,7 @@ class ListaDobleEnlazada:
     def __add__(self):
         return self.concatenar()
 
-
-    # Propiedades
-    
-    @property
-    def cabeza(self):
-        return self._cabeza
-    
-    @cabeza.setter
-    def cabeza(self, nuevaCabeza):
-        self._cabeza = nuevaCabeza
         
-    @property
-    def cola(self):
-        return self._cola
-    
-    @cola.setter
-    def cola(self, nuevaCola):
-        self._cola = nuevaCola
-        
-    @property
-    def tamanio(self):
-        return self._tamanio
-        
-
     
     # Métodos / Funciones
 
@@ -131,6 +111,7 @@ class ListaDobleEnlazada:
     
     
     def agregar(self, item):
+        
         nuevoNodo = Nodo(item)
         
         if self.esta_vacia():
@@ -166,7 +147,7 @@ class ListaDobleEnlazada:
         if posicion == 0:
             self.agregar(item)
             
-        elif posicion == self.tamanio-1:
+        elif posicion == self.tamanio:
             self.anexar(item)
             
         else:
@@ -174,39 +155,48 @@ class ListaDobleEnlazada:
             
             temp = self.cabeza
             
-            for i in range(posicion):
+            for i in range(posicion-1): # Se pone posición-1 para que se inserte el item en el índice que ingresó el usuario
                 temp = temp.siguiente
                 
             siguienteTemp = temp.siguiente
             temp.siguiente = nuevoNodo
             nuevoNodo.siguiente = siguienteTemp
             
+            self._tamanio+=1
+            
             
     
     def extraer(self, posicion=-1):
-        if posicion==-1 or posicion==self.tamanio:
+        
+        if -1 > posicion or posicion >= self._tamanio:
+            raise IndexError
+        
+        if posicion==-1 or posicion==self.tamanio-1:
             temp = self.cola
+            self.cola.anterior.siguiente = None # Corto el enlace del nodo anterior a la cola, y luego lo convierto en la nueva cola
             self.cola = self.cola.anterior
             return temp
             
         elif posicion == 0:
             temp = self.cabeza
+            self.cabeza.siguiente.anterior = None
             self.cabeza = self.cabeza.siguiente
             return temp
         
         else:
             temp = self.cabeza
             
-            for i in range(0,posicion):
-                temp= temp.siguiente
+            for nodo in range(posicion):
+                temp = temp.siguiente
             
-            anteriorTemp = temp.anterior
-            siguienteTemp= temp.siguiente
+            temp.anterior.siguiente = temp.siguiente
             
-            anteriorTemp.siguiente = siguienteTemp
-            siguienteTemp.anterior = anteriorTemp
+            if temp.siguiente != None:
+                temp.siguiente.anterior = temp.anterior
              
             return temp
+        
+        self._tamanio-=1
     
     
     def concatenar(self, lista):
@@ -221,19 +211,42 @@ class ListaDobleEnlazada:
 
 
 
-# Pruebas
+# Pruebas locales
+
 if __name__ == "__main__":
 
+    # Inicializo 2 listas
     lista1=ListaDobleEnlazada()
     lista2=ListaDobleEnlazada()
 
+
+    # Agrego 3 items al inicio de la 2da lista
     lista2.agregar(1)
     lista2.agregar(2)
     lista2.agregar(3)
-
+    # Anexo 2 items al final de la 2da lista
     lista2.anexar(8)
     lista2.anexar(9)
-
-    print(lista1.esta_vacia())
-
+    
+    # Muestro la lista 2 antes y después de insertarle un elemento
     print(lista2)
+    lista2.insertar(3, "Fito Paez") # Se inserta en el item en la posición 3
+    print(lista2)
+
+
+    #Muestro las 2 listas y pregunto si están vacías
+    print("\nLista 1:", lista1)
+    print("Lista 1 esta vacia:", lista1.esta_vacia())
+    print("Tamaño de la Lista 1:", lista1.tamanio)
+    
+    print("\nLista 2:", lista2)
+    print("Lista 2 está vacía:", lista2.esta_vacia())
+    print("Tamaño de la Lista 2:", lista2.tamanio)
+    
+    
+    # Pruebo el extraer en la lista 2
+    print("\nExtraigo el primer elemento de la lista 2:", lista2.extraer(0))
+    print("Lista 2:", lista2)
+    
+    print("\nExtraigo el último elemento de la lista 2:", lista2.extraer())
+    print("Lista 2:", lista2)
