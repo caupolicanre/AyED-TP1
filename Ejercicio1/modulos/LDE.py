@@ -1,7 +1,10 @@
 
 class Nodo:
-    '''asd'''
     def __init__(self, datoInicial):
+        '''
+        Atributos del Nodo
+        
+        '''
         self._dato = datoInicial
         self._siguiente = None
         self._anterior = None
@@ -10,14 +13,39 @@ class Nodo:
         return str(self.dato)
 
     def __repr__(self):
-        return str(self)
+        return str(self.dato)
+    
+    
+    # Propiedades
     
     @property
     def dato(self):
+        '''
+        
+
+        Returns
+        -------
+        TYPE
+            DESCRIPTION.
+
+        '''
         return self._dato
     
     @dato.setter
     def dato(self, nuevoDato):
+        '''
+        
+
+        Parameters
+        ----------
+        nuevoDato : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        '''
         self._dato = nuevoDato
     
     @property
@@ -41,20 +69,27 @@ class ListaDobleEnlazada:
     
     def __init__(self):
         '''Atributos de la Lista Doble Enlazada'''
+        
         self.cabeza = None
         self.cola = None
         self._tamanio = 0   # Contador para el tamaño de la lista
     
     def __str__(self):
-        #lista = [str(Nodo) for Nodo in self]    # Preguntar si se puede utilizar esta lista en el TP
-        for Nodo in self:
-            return str(Nodo)
+        '''Retorna '''
         
-
-    def __repr__(self):
-        return str(self)
+        return str([nodo.dato for nodo in self])
+    
+    def __getitem__(self, pos):
+        nodo = self.cabeza
+        
+        for i,nodo in enumerate(self):
+            nodo.siguiente
+            if i == pos:
+                break
     
     def __iter__(self):
+        '''Método para iterar la lista'''
+        
         nodo = self.cabeza
 
         while nodo:
