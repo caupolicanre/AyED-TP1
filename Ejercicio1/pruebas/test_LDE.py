@@ -245,65 +245,65 @@ class Test_LDE(unittest.TestCase):
         self.assertEqual(dato_original, nodo_actual.dato)
        
     
-    # def test_invertir(self):
+    def test_invertir(self):
         
-    #     """
-    #     Creo una LDE con elementos aleatorios, realizo una copia de la misma,
-    #     e invierto la original.
-    #     Recorro las listas, una desde el inicio y la otra desde el final y 
-    #     verifico que el contenido de los nodos sea el mismo.
+        """
+        Creo una LDE con elementos aleatorios, realizo una copia de la misma,
+        e invierto la original.
+        Recorro las listas, una desde el inicio y la otra desde el final y 
+        verifico que el contenido de los nodos sea el mismo.
         
-    #     """
+        """
 
-    #     for _ in range(0, self.n_elementos):
-    #         item = random.randint(-self.n_elementos, self.n_elementos)
-    #         self.lde_1.agregar(item)
+        for _ in range(0, self.n_elementos):
+            item = random.randint(-self.n_elementos, self.n_elementos)
+            self.lde_1.agregar(item)
         
-    #     lista_copia = self.lde_1.copiar()
-    #     self.lde_1.invertir()        
+        lista_copia = self.lde_1.copiar()
+        self.lde_1.invertir()        
    
-    #     nodo_inicio = lista_copia.cabeza
-    #     nodo_fin = self.lde_1.cola 
+        nodo_inicio = lista_copia.cabeza
+        nodo_fin = self.lde_1.cola 
         
-    #     for _ in range(self.n_elementos):
+        for _ in range(self.n_elementos):
             
-    #         self.assertEqual(nodo_inicio.dato, nodo_fin.dato)
+            self.assertEqual(nodo_inicio.dato, nodo_fin.dato)
             
-    #         nodo_inicio = nodo_inicio.siguiente
-    #         nodo_fin = nodo_fin.anterior       
+            nodo_inicio = nodo_inicio.siguiente
+            nodo_fin = nodo_fin.anterior       
             
     
-    # def test_ordenar(self):
-    #     """
-    #     Ordeno dos listas con los mismos elementos: una lista de Python con
-    #     el método sort() y una LDE con el método ordenar().
-    #     Comparo los resultados nodo a nodo y verifico que sean iguales.
+    def test_ordenar(self):
+        """
+        Ordeno dos listas con los mismos elementos: una lista de Python con
+        el método sort() y una LDE con el método ordenar().
+        Comparo los resultados nodo a nodo y verifico que sean iguales.
         
-    #     """
-    #     self.lde_3.ordenar()
-    #     self.lista_aux_3.sort()
+        """
+        self.lde_3.ordenar()
+        self.lista_aux_3.sort()
         
-    #     for i,nodo in enumerate(self.lde_3):
+        for i,nodo in enumerate(self.lde_3):
             
-    #         self.assertEqual(self.lista_aux_3[i], nodo.dato)
+            self.assertEqual(self.lista_aux_3[i], nodo.dato)
             
     
-    # def test_concatenar(self):
-    #     """
-    #     Comparo elemento a elemento de dos listas concatenadas:
-    #     una lista de Python obtenida con el operador "+" y otra LDE con
-    #     el método concatenar().
-    #     Comparo tamaños de ambas listas y verifico que sean iguales.
+    def test_concatenar(self):
+        """
+        Comparo elemento a elemento de dos listas concatenadas:
+        una lista de Python obtenida con el operador "+" y otra LDE con
+        el método concatenar().
+        Comparo tamaños de ambas listas y verifico que sean iguales.
         
-    #     """        
-    #     lista_concatenada1 = self.lista_aux_3 + self.lista_aux_2
-    #     lista_concatenada2 = self.lde_3.concatenar(self.lde_2)
+        """        
+        lista_concatenada1 = self.lista_aux_3 + self.lista_aux_2
+        lista_concatenada2 = self.lde_3.concatenar(self.lde_2)
         
-    #     for i,nodo in enumerate(lista_concatenada2):
+        for i,nodo in enumerate(lista_concatenada2):
             
-    #         self.assertEqual(lista_concatenada1[i], nodo.dato)
+            self.assertEqual(lista_concatenada1[i], nodo.dato)
             
-    #     self.assertEqual(len(lista_concatenada1), lista_concatenada2.tamanio)
+        self.assertEqual(len(lista_concatenada1), lista_concatenada2.tamanio)
                         
     
 if __name__ == "__main__":

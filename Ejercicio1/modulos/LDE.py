@@ -249,14 +249,6 @@ class ListaDobleEnlazada:
         '''
         return str([nodo.dato for nodo in self])
     
-    def __getitem__(self, pos):
-        nodo = self.cabeza
-        
-        for i,nodo in enumerate(self):
-            nodo.siguiente
-            if i == pos:
-                break
-    
     def __iter__(self):
         '''
         Método para iterar la lista
@@ -268,7 +260,7 @@ class ListaDobleEnlazada:
             yield nodo
             nodo = nodo.siguiente
     
-    def __add__(self):
+    def __add__(self, lista):
         '''
         Cuando se sumen dos Listas con el operador "+",
         se llama al método "concatenar", para concatenarlas.
@@ -280,7 +272,7 @@ class ListaDobleEnlazada:
             concatenada al final de la primera.
 
         '''
-        return self.concatenar()
+        return self.concatenar(lista)
 
         
     
@@ -533,6 +525,17 @@ class ListaDobleEnlazada:
         return nuevaLista
     
     def invertir(self):
+        '''
+        Invierte el orden de los elementos de la lista.
+
+        Returns
+        -------
+        class
+            Retorna la Lista Doble Enlazada Invertida.
+
+        '''
+        # Guardo la cabeza vieja para actualizarla como cola de la Lista invertida
+        cabezaTemp = self.cabeza
         
         nodo1 = self.cabeza # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
         nodo2 = nodo1.siguiente # Asigno el Nodo siguiente a la cabeza para comenzar el intercambio
@@ -548,20 +551,84 @@ class ListaDobleEnlazada:
             nodo1 = nodo2
             nodo2 = nodo2.anterior
 
-        
+        # Actualizo la cabeza y cola de la Lista
         self.cabeza = nodo1
-        print(self.cabeza)
-        print(self.cola)
+        self.cola = cabezaTemp
+        
         return self
     
     def ordenar(self):
-        None
+        
+        terminar = None
+        
+        while self.cabeza != terminar:
+            nodoActual = self.cabeza
+            temp = self.cabeza
+            
+            while temp.siguiente != terminar:
+                cambiar = temp.siguiente
+                if temp.dato > cambiar.dato:
+                    temp.siguiente = cambiar.siguiente
+                    cambiar.siguiente = temp
+                    if temp != self.cabeza:
+                        nodoActual.siguiente = cambiar
+                    else:
+                        self.cabeza = cambiar
+                    
+                    aux = temp
+                    temp = cambiar
+                    cambiar = aux
+                nodoActual = temp
+                temp = temp.siguiente
+            terminar = temp
     
     def concatenar(self, lista):
+        '''
+        Recibe una lista como argumento y retorna la lista 
+        actual con la lista pasada como parámetro concatenada 
+        al final de la primera.
+        Funciona si se utiliza el operador '+'
+
+        Parameters
+        ----------
+        lista : class
+            Recibe como parametro una Lista Doble Enlazada
+
+        Returns
+        -------
+        class
+            Retorna la Lista actual concatenada con la Lista
+            recibida como parámetro.
+
+        '''
         
-        lista.cabeza = lista. 
-     
-        return self
+        if self._tamanio == 0:
+            '''
+            La Lista actual está vacía.
+            Retorna la Lista recibida como parámetro
+            '''
+            return lista
+        
+        elif lista._tamanio == 0:
+            '''
+            La Lista recibida como parámetro está vacía.
+            Retorna la Lista actual.
+            '''
+            return self
+        
+        else:
+            '''
+            Ambas Listas contienen elementos.
+            Retorna la Lista actual concatenada con la Lista
+            recibida como parámetro.
+            '''
+            # Conecto la cola de la Lista actual, con la cabeza de la Lista recibida
+            self.cola.siguiente = lista.cabeza
+            lista.cabeza.anterior = self.cola
+            self.cola = lista.cola
+            self._tamanio = self._tamanio + lista._tamanio
+            
+            return self
 
 
 
@@ -587,11 +654,9 @@ if __name__ == "__main__":
     lista2.anexar(9)
     
     
-    # ====================
-    # INSERTAR NO FUNCIONA
-    # ====================
-    # Funciona al inicio y por posicón entre los extremos.
-    # NO FUNCIONA INSERTAR AL FINAL. PERO EL TEST CORRE
+    # =================
+    # INSERTAR FUNCIONA
+    # =================
     
     # Muestro la lista 2 antes y después de insertarle un elemento
     print("\nLista 2 Inicializada con valores por medio de agregar:\n", lista2)
@@ -660,9 +725,29 @@ if __name__ == "__main__":
     print("Lista 2 Copiada:\n", lista2.copiar())
     
     
-    # ==============
-    # INVERTIR
-    # ==============
+    # =================
+    # INVERTIR FUNCIONA
+    # =================
     
     print("\n\nLista 2 Original:\n", lista2)
-    print("Lista 2 Invertida:\n", lista2.invertir())    
+    print("Lista 2 Invertida:\n", lista2.invertir())
+    
+    
+    # =============
+    # CONCATENAR
+    # =============
+    
+    # Agrego algunos elementos a la lista 1 para poder concatenarla con la lista 2
+    lista1.agregar(91)
+    lista1.agregar(19)
+    lista3=ListaDobleEnlazada()
+    lista3.agregar(22)
+    lista3.agregar(33)
+    
+    print("\nLista 1:", lista1)
+    print("Lista 2:", lista2)
+    print("\nLista concatenada:", lista2.concatenar(lista1))
+    
+    print("\nLista 1:", lista1)
+    print("Lista 3:", lista3)
+    print("\nLista concatenada:", lista1+lista3)
