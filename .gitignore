@@ -130,6 +130,7 @@ dmypy.json
 
 # Configuración de VS Code
 .vscode/
+*.code-workspace
 
 # Archivos init
 __init__.py
