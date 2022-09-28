@@ -131,84 +131,84 @@ class Test_LDE(unittest.TestCase):
         self.assertRaises(Exception, self.lde_2.insertar, self.n_elementos + 10, 220)
 
 
-    # def test_extraer_extremos(self):
-    #     """
-    #     pruebo extraer ítems al inicio y al final de la LDE
-    #     con/sin parámetro, verifico el valor extraído y el tamaño
-    #     resultante de la LDE
-    #     """
-    #     """al inicio"""
-    #     self.assertEqual(self.lde_3.extraer(0).dato, self.lista_aux_3[0])
-    #     self.assertEqual(self.lde_3.tamanio, self.n_elementos-1)
-        # """al final sin parámetro"""
-        # self.assertEqual(self.lde_3.extraer().dato, self.lista_aux_3[-1])
-        # self.assertEqual(self.lde_3.tamanio, self.n_elementos-2)
-        # """al final usando parámetro"""
-        # self.assertEqual(self.lde_3.extraer(self.lde_3.tamanio-1).dato, self.lista_aux_3[-2])
-        # self.assertEqual(self.lde_3.tamanio, self.n_elementos-3)
-        # """al final parámetro -1"""
-        # self.assertEqual(self.lde_3.extraer(-1).dato, self.lista_aux_3[-3])
-        # self.assertEqual(self.lde_3.tamanio, self.n_elementos-4)
+    def test_extraer_extremos(self):
+        """
+        pruebo extraer ítems al inicio y al final de la LDE
+        con/sin parámetro, verifico el valor extraído y el tamaño
+        resultante de la LDE
+        """
+        """al inicio"""
+        self.assertEqual(self.lde_3.extraer(0).dato, self.lista_aux_3[0])
+        self.assertEqual(self.lde_3.tamanio, self.n_elementos-1)
+        """al final sin parámetro"""
+        self.assertEqual(self.lde_3.extraer().dato, self.lista_aux_3[-1])
+        self.assertEqual(self.lde_3.tamanio, self.n_elementos-2)
+        """al final usando parámetro"""
+        self.assertEqual(self.lde_3.extraer(self.lde_3.tamanio-1).dato, self.lista_aux_3[-2])
+        self.assertEqual(self.lde_3.tamanio, self.n_elementos-3)
+        """al final parámetro -1"""
+        self.assertEqual(self.lde_3.extraer(-1).dato, self.lista_aux_3[-3])
+        self.assertEqual(self.lde_3.tamanio, self.n_elementos-4)
         
-    # def test_extraer_interior(self):
-    #     """
-    #     extraigo un elemento de una posición aleatoria de la lista
-    #     con elementos no repetidos y compruebo que el mismo no permanece
-    #     en la lista
-    #     """
-    #     print(f"\nPosición aleatoria donde se extrae: {self.posicion}")
-    #     item = self.lde_3.extraer(self.posicion)
-    #     print(f"ítem extraído: {item}")
-    #     nodo_actual = self.lde_3.cabeza
+    def test_extraer_interior(self):
+        """
+        extraigo un elemento de una posición aleatoria de la lista
+        con elementos no repetidos y compruebo que el mismo no permanece
+        en la lista
+        """
+        print(f"\nPosición aleatoria donde se extrae: {self.posicion}")
+        item = self.lde_3.extraer(self.posicion)
+        print(f"ítem extraído: {item}")
+        nodo_actual = self.lde_3.cabeza
         
-    #     while nodo_actual:            
-    #         self.assertNotEqual(item, nodo_actual.dato)
-    #         nodo_actual = nodo_actual.siguiente 
+        while nodo_actual:            
+            self.assertNotEqual(item, nodo_actual.dato)
+            nodo_actual = nodo_actual.siguiente 
         
-    #     self.assertEqual(self.lde_3.tamanio, self.n_elementos-1)    
+        self.assertEqual(self.lde_3.tamanio, self.n_elementos-1)    
         
-    # def test_excepciones_extraer(self):
-    #     """
-    #     pruebo extraer en una lista vacía y en posiciones fuera
-    #     de los límites de la LDE. Compruebo las excepciones
-    #     """ 
-    #     """LDE vacía"""             
-    #     self.assertRaises(Exception, self.lde_1.extraer)
-    #     self.assertRaises(Exception, self.lde_1.extraer, 0)
-    #     self.assertRaises(Exception, self.lde_1.extraer, -1)
-    #     self.assertRaises(Exception, self.lde_1.extraer, self.n_elementos-1)
-    #     self.assertRaises(Exception, self.lde_1.extraer, self.n_elementos + 10)
-    #     self.assertRaises(Exception, self.lde_1.extraer, -(self.n_elementos + 10))
-    #     """LDE con elementos entre -100 y 100"""
-    #     self.assertRaises(Exception, self.lde_2.extraer, -(self.n_elementos + self.n_elementos/4))
-    #     self.assertRaises(Exception, self.lde_2.extraer, (self.n_elementos + self.n_elementos/4))
-    #     """LDE co elementos entre -200 y 200"""
-    #     self.assertRaises(Exception, self.lde_3.extraer, (self.n_elementos + self.n_elementos/2))
-    #     self.assertRaises(Exception, self.lde_3.extraer, -(self.n_elementos + self.n_elementos/2))
+    def test_excepciones_extraer(self):
+        """
+        pruebo extraer en una lista vacía y en posiciones fuera
+        de los límites de la LDE. Compruebo las excepciones
+        """ 
+        """LDE vacía"""             
+        self.assertRaises(Exception, self.lde_1.extraer)
+        self.assertRaises(Exception, self.lde_1.extraer, 0)
+        self.assertRaises(Exception, self.lde_1.extraer, -1)
+        self.assertRaises(Exception, self.lde_1.extraer, self.n_elementos-1)
+        self.assertRaises(Exception, self.lde_1.extraer, self.n_elementos + 10)
+        self.assertRaises(Exception, self.lde_1.extraer, -(self.n_elementos + 10))
+        """LDE con elementos entre -100 y 100"""
+        self.assertRaises(Exception, self.lde_2.extraer, -(self.n_elementos + self.n_elementos/4))
+        self.assertRaises(Exception, self.lde_2.extraer, (self.n_elementos + self.n_elementos/4))
+        """LDE co elementos entre -200 y 200"""
+        self.assertRaises(Exception, self.lde_3.extraer, (self.n_elementos + self.n_elementos/2))
+        self.assertRaises(Exception, self.lde_3.extraer, -(self.n_elementos + self.n_elementos/2))
      
     
-    # def test_mostrar_por_consola(self):
-    #     """
-    #     compruebo que la LSE se muestre por consola como una lista de
-    #     elementos, donde cada elemento muestra el atributo "dato" del nodo
-    #     correspondiente en la LSE
-    #     """
-    #     self.assertEqual(str(self.lista_aux_3), str(self.lde_3))
+    def test_mostrar_por_consola(self):
+        """
+        compruebo que la LSE se muestre por consola como una lista de
+        elementos, donde cada elemento muestra el atributo "dato" del nodo
+        correspondiente en la LSE
+        """
+        self.assertEqual(str(self.lista_aux_3), str(self.lde_3))
     
             
-    # def auxiliar_copiar(self, lista_original, lista_copia):
-    #     """
-    #     función auxiliar para el test del método copiar
-    #     """
-    #     nodo_original = lista_original.cabeza
-    #     nodo_copia = lista_copia.cabeza
+    def auxiliar_copiar(self, lista_original, lista_copia):
+        """
+        función auxiliar para el test del método copiar
+        """
+        nodo_original = lista_original.cabeza
+        nodo_copia = lista_copia.cabeza
         
-    #     self.assertEqual(lista_original.tamanio, lista_copia.tamanio)
+        self.assertEqual(lista_original.tamanio, lista_copia.tamanio)
         
-    #     while nodo_original or nodo_copia: #termina si ambos son None
-    #         self.assertEqual(nodo_original.dato, nodo_copia.dato)
-    #         nodo_original = nodo_original.siguiente
-    #         nodo_copia = nodo_copia.siguiente
+        while nodo_original or nodo_copia: #termina si ambos son None
+            self.assertEqual(nodo_original.dato, nodo_copia.dato)
+            nodo_original = nodo_original.siguiente
+            nodo_copia = nodo_copia.siguiente
         
     
     # def test_copiar(self):
