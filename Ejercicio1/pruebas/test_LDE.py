@@ -211,38 +211,38 @@ class Test_LDE(unittest.TestCase):
             nodo_copia = nodo_copia.siguiente
         
     
-    # def test_copiar(self):
-    #     """
-    #     hago una copia de una LDE con elementos y sin elementos
-    #     y comparo nodo a nodo para verificar la copia.
-    #     compruebo que se hace la copia del contenido de cada nodo
-    #     remuevo un nodo de la copia en una posición aleatoria, modifico
-    #     el contenido del nodo y verifico que el contenido del nodo en la 
-    #     misma posición en la lista original no se modificó.        
-    #     """
-    #     lde_3_copia = self.lde_3.copiar()
-    #     self.auxiliar_copiar(self.lde_3, lde_3_copia)
+    def test_copiar(self):
+        """
+        hago una copia de una LDE con elementos y sin elementos
+        y comparo nodo a nodo para verificar la copia.
+        compruebo que se hace la copia del contenido de cada nodo
+        remuevo un nodo de la copia en una posición aleatoria, modifico
+        el contenido del nodo y verifico que el contenido del nodo en la 
+        misma posición en la lista original no se modificó.        
+        """
+        lde_3_copia = self.lde_3.copiar()
+        self.auxiliar_copiar(self.lde_3, lde_3_copia)
         
-    #     lde_1_copia = self.lde_1.copiar()
-    #     self.auxiliar_copiar(self.lde_1, lde_1_copia)
+        lde_1_copia = self.lde_1.copiar()
+        self.auxiliar_copiar(self.lde_1, lde_1_copia)
     
-    #     self.posicion = 5
-    #     #extraigo de la copia un nodo         
-    #     nodo_extraido = lde_3_copia.extraer(self.posicion)        
-    #     dato_original = nodo_extraido.dato
+        self.posicion = 5
+        #extraigo de la copia un nodo         
+        nodo_extraido = lde_3_copia.extraer(self.posicion)        
+        dato_original = nodo_extraido.dato
        
-    #     #modifico el nodo extraído
-    #     nodo_extraido.dato =  3*self.n_elementos #valor fuera del rango
+        #modifico el nodo extraído
+        nodo_extraido.dato =  3*self.n_elementos #valor fuera del rango
   
-    #     #compruebo que el contenido en la lista original
-    #     #en la posición del nodo extraído no se modifica
-    #     contador = 0
-    #     nodo_actual = self.lde_3.cabeza        
-    #     for _ in range(self.posicion):
-    #         nodo_actual = nodo_actual.siguiente 
-    #         contador += 1             
+        #compruebo que el contenido en la lista original
+        #en la posición del nodo extraído no se modifica
+        contador = 0
+        nodo_actual = self.lde_3.cabeza        
+        for _ in range(self.posicion):
+            nodo_actual = nodo_actual.siguiente 
+            contador += 1             
             
-    #     self.assertEqual(dato_original, nodo_actual.dato)
+        self.assertEqual(dato_original, nodo_actual.dato)
        
     
     # def test_invertir(self):

@@ -514,9 +514,11 @@ class ListaDobleEnlazada:
         
     def copiar(self):
         nuevaLista = ListaDobleEnlazada()
+        temp = self.cabeza
         
-        for i in range(0, self._tamanio-1):
-            nuevaLista.insertar(i, self[i].dato)
+        for i in range(self._tamanio):
+            nuevaLista.anexar(temp.dato)
+            temp = temp.siguiente
         
         return nuevaLista
     
@@ -617,10 +619,17 @@ if __name__ == "__main__":
     print("Lista 2 Cola:", lista2.cola)
     
     
-    # ===========
-    # COPIAR
-    # ===========
+    # ===============
+    # COPIAR FUNCIONA
+    # ===============
     
     # Lista 2 Original
     print("\n\nLista 2 Original:\n", lista2)
     print("Lista 2 Copiada:\n", lista2.copiar())
+    
+    
+    # ==============
+    # INVERTIR
+    # ==============
+    
+    
