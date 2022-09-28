@@ -26,7 +26,7 @@ for n in valores_n:
 plt.clf()
 plt.plot(valores_n, tiempo, label="Ordenamiento por Inserción")
 #plt.yscale('log')
-plt.xlabel("tamaño de la lista")
+plt.xlabel("tama�o de la lista")
 plt.ylabel("tiempos del algoritmo")
 plt.title("Tiempos en fn. del nro de elementos")
 plt.legend()
