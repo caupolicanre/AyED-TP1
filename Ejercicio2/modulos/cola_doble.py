@@ -2,8 +2,7 @@ from LDE import ListaDobleEnlazada
 
 class ColaDoble():
     def  __init__(self):
-        self.item= ListaDobleEnlazada()
-        
+        self.item = ListaDobleEnlazada()
         
         
     # Propiedades
@@ -33,6 +32,9 @@ class ColaDoble():
 
         '''
         return self.item.__str__()
+    
+    def __iter__(self):
+        return iter(self.item)
     
     def esta_vacia(self):
         '''
@@ -108,10 +110,6 @@ class ColaDoble():
        return self.item.extraer(0)    
         
     
-
-
-
-
 
 
 if __name__=='__main__':
