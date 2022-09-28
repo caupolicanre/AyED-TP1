@@ -1,15 +1,18 @@
-from nodo import Nodo
+from LDE import Nodo
 
 class Carta(Nodo):
     
-    def __init__(self, palo, numero):
+    def __init__(self, palo, numero, cara = "boca abajo"):
         self._palo = palo
         self._numero = numero
-        self.boca_abajo = None
-        self.boca_arriba = None
+        self._cara = cara
+        
     
     def __str__(self):
-        return str(self._palo + " " + self._numero)
+        if self._cara == "boca abajo":
+            return "-X"
+        elif self._cara=="boca arriba":
+            return str(self._palo+" "+str(self._numero))
     
     def __repr__(self):
         return str(self)
@@ -39,3 +42,10 @@ class Carta(Nodo):
     @boca_arriba.setter
     def boca_arriba(self, estado):
         self.boca_arriba = estado
+    
+
+        
+if __name__ == "__main__":
+    pruebaCarta=Carta(palo="corazon", numero=5,cara="boca abajo")
+    print(pruebaCarta)
+    
