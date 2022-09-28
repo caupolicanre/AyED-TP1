@@ -533,17 +533,33 @@ class ListaDobleEnlazada:
         return nuevaLista
     
     def invertir(self):
-        None
+        
+        nodo1 = self.cabeza # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
+        nodo2 = nodo1.siguiente # Asigno el Nodo siguiente a la cabeza para comenzar el intercambio
+        
+        # Intercambio los Nodos
+        nodo1.siguiente = None
+        nodo1.anterior = nodo2
+        
+        # Bucle para repetir el intercambio de Nodos hasta que el Nodo 2 sea igual a None, por ende llegó a la cola
+        while nodo2 != None:
+            nodo2.anterior = nodo2.siguiente
+            nodo2.siguiente = nodo1
+            nodo1 = nodo2
+            nodo2 = nodo2.anterior
+
+        
+        self.cabeza = nodo1
+        print(self.cabeza)
+        print(self.cola)
+        return self
     
     def ordenar(self):
         None
     
     def concatenar(self, lista):
-        temp = lista.cabeza
         
-        for i in range(lista.tamanio):
-            self.anexar(temp.dato)
-            temp = temp.siguiente
+        lista.cabeza = lista. 
      
         return self
 
@@ -648,4 +664,5 @@ if __name__ == "__main__":
     # INVERTIR
     # ==============
     
-    
+    print("\n\nLista 2 Original:\n", lista2)
+    print("Lista 2 Invertida:\n", lista2.invertir())    
