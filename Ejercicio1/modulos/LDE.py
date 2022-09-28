@@ -513,6 +513,16 @@ class ListaDobleEnlazada:
             return temp
         
     def copiar(self):
+        '''
+        Realiza una copia de la lista elemento a elemento
+        y devuelve la copia.
+
+        Returns
+        -------
+        nuevaLista : class
+            Retorna una copia de la Lista Doble Enlazada.
+
+        '''
         nuevaLista = ListaDobleEnlazada()
         temp = self.cabeza
         
@@ -521,6 +531,12 @@ class ListaDobleEnlazada:
             temp = temp.siguiente
         
         return nuevaLista
+    
+    def invertir(self):
+        None
+    
+    def ordenar(self):
+        None
     
     def concatenar(self, lista):
         temp = lista.cabeza
