@@ -14,12 +14,13 @@ class Nodo:
     
     def __init__(self, datoInicial):
         '''
-        Atributos del Nodo
+        Atributos del Nodo.
 
         Parameters
         ----------
         datoInicial : any type
-            Almacena el valor ingresado por el usuario. Puede ser de cualquier tipo.
+            Almacena el valor ingresado por el usuario. 
+            Puede ser de cualquier tipo.
         
         Returns
         -------
@@ -52,7 +53,7 @@ class Nodo:
     @property
     def dato(self):
         '''
-        Getter del dato del Nodo.
+        Getter del dato que almacena el Nodo.
 
         Returns
         -------
@@ -65,7 +66,7 @@ class Nodo:
     @dato.setter
     def dato(self, nuevoDato):
         '''
-        Setter del dato Nodo.
+        Setter del dato que almacena el Nodo.
 
         Parameters
         ----------
@@ -100,7 +101,8 @@ class Nodo:
         Parameters
         ----------
         nuevoAnterior : reference
-            Nueva referencia al Nodo que va a reemplazar el anterior del Nodo actual.
+            Nueva referencia al Nodo que va a reemplazar 
+            el anterior del Nodo actual.
 
         Returns
         -------
@@ -130,7 +132,8 @@ class Nodo:
         Parameters
         ----------
         nuevoSiguiente : reference
-            Nueva referencia al Nodo que va a reemplazar el siguiente del Nodo actual.
+            Nueva referencia al Nodo que va a reemplazar 
+            el siguiente del Nodo actual.
 
         Returns
         -------
@@ -144,7 +147,7 @@ class Nodo:
 '''Clase de la Lista Doble Enlazada'''
 
 class ListaDobleEnlazada:
-    
+
     def __init__(self):
         '''
         Atributos de la Lista Doble Enlazada
@@ -183,7 +186,8 @@ class ListaDobleEnlazada:
         Parameters
         ----------
         nuevaCabeza : reference
-            Nueva referencia al Nodo que va a reemplazar la cabeza actual de la Lista.
+            Nueva referencia al Nodo que va a reemplazar la 
+            cabeza actual de la Lista.
 
         Returns
         -------
@@ -213,7 +217,8 @@ class ListaDobleEnlazada:
         Parameters
         ----------
         nuevaCola : reference
-            Nueva referencia al Nodo que va a reemplazar la cola actual de la Lista.
+            Nueva referencia al Nodo que va a reemplazar la 
+            cola actual de la Lista.
 
         Returns
         -------
@@ -307,7 +312,7 @@ class ListaDobleEnlazada:
         '''        
         nuevoNodo = Nodo(item)
         
-        if self._tamanio == 0:       # Si la lista está vacía, se asigna como cabeza y cola el nuevo Nodo
+        if self.tamanio == 0:       # Si la lista está vacía, se asigna como cabeza y cola el nuevo Nodo
             self.cabeza = nuevoNodo
             self.cola = nuevoNodo
         else:
@@ -334,7 +339,7 @@ class ListaDobleEnlazada:
         '''
         nuevoNodo = Nodo(item)
         
-        if self._tamanio == 0:
+        if self.tamanio == 0:
             self.cabeza = nuevoNodo
             self.cola = nuevoNodo
         else:
@@ -370,7 +375,7 @@ class ListaDobleEnlazada:
         '''      
         
         
-        if posicion < 0 or posicion >= self._tamanio:
+        if posicion < 0 or posicion >= self.tamanio:
             '''
             El usuario ingresa una posición fuera del rango.
             '''
@@ -384,28 +389,20 @@ class ListaDobleEnlazada:
             '''
             self.agregar(item)
             
-        elif posicion == self._tamanio-1: # Si le dejo el -1 no anda el testeo de insertar en la última posición
+        elif posicion == self.tamanio-1:
             '''
             El usuario ingresa la última posición.
             Se inserta el elemento en la última posición de la Lista.
+            Quedando el Nodo insertado una posición antes de la cola.
             '''
-        
-            # Lo ideal es dejar el anexar, pero con el anexar me tira error
-            # self.anexar(item)
             
             nuevoNodo = Nodo(item)
             
-            # Queda el nuevo Nodo entre la cola y el penúltimo Nodo
+            # Queda el nuevo Nodo antes de la cola
             self.cola.anterior.siguiente = nuevoNodo
             nuevoNodo.anterior = self.cola.anterior
             nuevoNodo.siguiente = self.cola
-            self.cola.anterior = nuevoNodo
-            
-            # Esto es exactamente lo mismo que llamar a anexar, pero no funciona el testeo, solamente funciona en el testeo local
-            # nuevoNodo.anterior = self.cola
-            # self.cola.siguiente = nuevoNodo
-            # self.cola = nuevoNodo
-            
+            self.cola.anterior = nuevoNodo            
             
             self._tamanio+=1
             
@@ -415,9 +412,10 @@ class ListaDobleEnlazada:
             Se recorre la lista hasta la posición recibida como parámetro,
             y se inserta el elemento recibido.
             '''
+            
             nuevoNodo = Nodo(item)
             
-            temp = self.cabeza
+            temp = self.cabeza  # El nodo inicial arranca en la cabeza y recorre la Lista hasta la posición recibida por el parámetro
             
             for i in range(posicion):
                 temp = temp.siguiente
@@ -433,7 +431,7 @@ class ListaDobleEnlazada:
     def extraer(self, posicion: int =-1):
         '''
         Elimina y devuelve el ítem en "posición".
-        Si no se indica el parámetro posición, se elimina y devuelve 
+        Si no se indica el parámetro "posicion", se elimina y devuelve 
         el último elemento de la lista.
 
         Parameters
@@ -455,7 +453,7 @@ class ListaDobleEnlazada:
 
         '''
         
-        if posicion < -1 or posicion >= self._tamanio:
+        if posicion < -1 or posicion >= self.tamanio:
             '''
             El usuario ingresa una posición fuera del rango.
             '''
@@ -466,9 +464,9 @@ class ListaDobleEnlazada:
             El usuario no ingresa posición o ingresa la última posición.
             Se extrae el último elemento de la Lista.
             '''
-            temp = self.cola # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
+            temp = self.cola                    # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
             self.cola.anterior.siguiente = None # Elimino la referencia del Nodo a extraer
-            self.cola = temp.anterior # Actualizo la cola con el Nodo anterior
+            self.cola = temp.anterior           # Actualizo la cola con el Nodo anterior
             
             self._tamanio-=1
             return temp
@@ -478,9 +476,9 @@ class ListaDobleEnlazada:
             El usuario ingresa la primera posición.
             Se extrae el primer elemento de la Lista.
             '''
-            temp = self.cabeza # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
-            self.cabeza.siguiente.anterior = None # Elimino la referencia del Nodo a extraer
-            self.cabeza = temp.siguiente # Actualizo la cabeza con el Nodo siguiente
+            temp = self.cabeza                      # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
+            self.cabeza.siguiente.anterior = None   # Elimino la referencia del Nodo a extraer
+            self.cabeza = temp.siguiente            # Actualizo la cabeza con el Nodo siguiente
             
             self._tamanio-=1
             return temp
@@ -498,8 +496,8 @@ class ListaDobleEnlazada:
             
             temp = nodoExtraer # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
             
-            nodoExtraer.anterior.siguiente = nodoExtraer.siguiente # Elimino la referencia que tiene el Nodo anterior y la reemplazo por la referencia al Nodo siguiente del que se extrajo
-            nodoExtraer.siguiente.anterior = nodoExtraer.anterior # Elimino la referencia que tiene el Nodo siguiente y la reemplazo por la referencia al Nodo anterior del que se extrajo
+            nodoExtraer.anterior.siguiente = nodoExtraer.siguiente  # Elimino la referencia que tiene el Nodo anterior y la reemplazo por la referencia al Nodo siguiente del que se extrajo
+            nodoExtraer.siguiente.anterior = nodoExtraer.anterior   # Elimino la referencia que tiene el Nodo siguiente y la reemplazo por la referencia al Nodo anterior del que se extrajo
             
             self._tamanio-=1
             return temp
@@ -518,7 +516,7 @@ class ListaDobleEnlazada:
         nuevaLista = ListaDobleEnlazada()
         temp = self.cabeza
         
-        for i in range(self._tamanio):
+        for i in range(self.tamanio):
             nuevaLista.anexar(temp.dato)
             temp = temp.siguiente
         
@@ -537,7 +535,7 @@ class ListaDobleEnlazada:
         # Guardo la cabeza vieja para actualizarla como cola de la Lista invertida
         cabezaTemp = self.cabeza
         
-        nodo1 = self.cabeza # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
+        nodo1 = self.cabeza     # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
         nodo2 = nodo1.siguiente # Asigno el Nodo siguiente a la cabeza para comenzar el intercambio
         
         # Intercambio los Nodos
@@ -557,30 +555,91 @@ class ListaDobleEnlazada:
         
         return self
     
+    # def ordenar(self):
+    #     '''
+    #     Ordena los elementos de la lista de "menor a mayor".
+
+    #     Returns
+    #     -------
+    #     None.
+
+    #     '''
+        
+    #     terminar = None
+        
+    #     while self.cabeza != terminar:
+    #         nodoActual = self.cabeza
+    #         temp = self.cabeza
+            
+    #         while temp.siguiente != terminar:   # Cuando llegue a la cola, temp.siguiente == None, por ende va a salir del bucle
+    #             cambiar = temp.siguiente        # Almaceno el Nodo siguiente a "temp" para poder compararlos
+                
+    #             if temp.dato > cambiar.dato:    # Si el Nodo de la izquierda es mayor al de la derecha, desplaza hacia la derecha el primer Nodo (temp)
+    #                 # Desplazamiento del Nodo mayor (temp)
+    #                 temp.siguiente = cambiar.siguiente
+    #                 cambiar.siguiente = temp
+                    
+    #                 if temp != self.cabeza:
+    #                     nodoActual.siguiente = cambiar
+    #                 else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
+    #                     self.cabeza = cambiar
+                    
+    #                 aux = temp
+    #                 temp = cambiar
+    #                 cambiar = aux
+                    
+    #             nodoActual = temp
+    #             temp = temp.siguiente
+                
+    #         terminar = temp
+    
+    
+    '''ORDENAR ACTUALIZANDO BIEN LA COLA'''
     def ordenar(self):
+        '''
+        Ordena los elementos de la lista de "menor a mayor".
+
+        Returns
+        -------
+        None.
+
+        '''
         
         terminar = None
+        nodos = 1   # Variable auxiliar para la actualización de la cola
         
         while self.cabeza != terminar:
             nodoActual = self.cabeza
             temp = self.cabeza
             
-            while temp.siguiente != terminar:
-                cambiar = temp.siguiente
-                if temp.dato > cambiar.dato:
+            while temp.siguiente != terminar:   # Cuando llegue a la cola, temp.siguiente == None, por ende va a salir del bucle
+                cambiar = temp.siguiente        # Almaceno el Nodo siguiente a "temp" para poder compararlos
+                
+                if temp.dato > cambiar.dato:    # Si el Nodo de la izquierda (temp) es mayor al de la derecha (cambiar), desplaza hacia la derecha el primer Nodo (temp)
+                    # Desplazamiento del Nodo mayor (temp)
+                    
                     temp.siguiente = cambiar.siguiente
+                    temp.anterior = cambiar
+                    
                     cambiar.siguiente = temp
+                    
                     if temp != self.cabeza:
                         nodoActual.siguiente = cambiar
-                    else:
+                    else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
                         self.cabeza = cambiar
                     
                     aux = temp
                     temp = cambiar
                     cambiar = aux
+                    self.cola = cambiar
+                    
+                
                 nodoActual = temp
                 temp = temp.siguiente
+                       
+                
             terminar = temp
+    
     
     def concatenar(self, lista):
         '''
@@ -602,14 +661,14 @@ class ListaDobleEnlazada:
 
         '''
         
-        if self._tamanio == 0:
+        if self.tamanio == 0:
             '''
             La Lista actual está vacía.
             Retorna la Lista recibida como parámetro
             '''
             return lista
         
-        elif lista._tamanio == 0:
+        elif lista.tamanio == 0:
             '''
             La Lista recibida como parámetro está vacía.
             Retorna la Lista actual.
@@ -633,7 +692,7 @@ class ListaDobleEnlazada:
 
 
 
-# Pruebas locales
+# Pruebas locales. TODO FUNCIONA
 
 if __name__ == "__main__":
 
@@ -751,3 +810,21 @@ if __name__ == "__main__":
     print("\nLista 1:", lista1)
     print("Lista 3:", lista3)
     print("\nLista concatenada:", lista1+lista3)
+    
+    
+    # ========
+    # ORDENAR
+    # ========
+    
+    lista4 = ListaDobleEnlazada()
+    lista4.agregar(2)
+    lista4.agregar(56)
+    lista4.anexar(17)
+    
+    print("\nLista Original:\n", lista4)
+    print("Cabeza original:", lista4.cabeza)
+    print("Cola original:", lista4.cola)
+    lista4.ordenar()
+    print("\nLista ordenada de menor a mayor:\n", lista4)
+    print("Cabeza nueva:", lista4.cabeza)
+    print("Cola nueva:", lista4.cola)
