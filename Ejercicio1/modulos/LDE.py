@@ -555,46 +555,7 @@ class ListaDobleEnlazada:
         
         return self
     
-    # def ordenar(self):
-    #     '''
-    #     Ordena los elementos de la lista de "menor a mayor".
-
-    #     Returns
-    #     -------
-    #     None.
-
-    #     '''
-        
-    #     terminar = None
-        
-    #     while self.cabeza != terminar:
-    #         nodoActual = self.cabeza
-    #         temp = self.cabeza
-            
-    #         while temp.siguiente != terminar:   # Cuando llegue a la cola, temp.siguiente == None, por ende va a salir del bucle
-    #             cambiar = temp.siguiente        # Almaceno el Nodo siguiente a "temp" para poder compararlos
-                
-    #             if temp.dato > cambiar.dato:    # Si el Nodo de la izquierda es mayor al de la derecha, desplaza hacia la derecha el primer Nodo (temp)
-    #                 # Desplazamiento del Nodo mayor (temp)
-    #                 temp.siguiente = cambiar.siguiente
-    #                 cambiar.siguiente = temp
-                    
-    #                 if temp != self.cabeza:
-    #                     nodoActual.siguiente = cambiar
-    #                 else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
-    #                     self.cabeza = cambiar
-                    
-    #                 aux = temp
-    #                 temp = cambiar
-    #                 cambiar = aux
-                    
-    #             nodoActual = temp
-    #             temp = temp.siguiente
-                
-    #         terminar = temp
     
-    
-    '''ORDENAR ACTUALIZANDO BIEN LA COLA'''
     def ordenar(self):
         '''
         Ordena los elementos de la lista de "menor a mayor".
@@ -606,7 +567,6 @@ class ListaDobleEnlazada:
         '''
         
         terminar = None
-        nodos = 1   # Variable auxiliar para la actualización de la cola
         
         while self.cabeza != terminar:
             nodoActual = self.cabeza
@@ -626,11 +586,13 @@ class ListaDobleEnlazada:
                     if temp != self.cabeza:
                         nodoActual.siguiente = cambiar
                     else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
-                        self.cabeza = cambiar
+                        self.cabeza = cambiar   # Actualizo la cabeza nueva
                     
                     aux = temp
                     temp = cambiar
                     cambiar = aux
+                    
+                    # Actualizo la cola nueva
                     self.cola = cambiar
                     
                 
@@ -638,7 +600,7 @@ class ListaDobleEnlazada:
                 temp = temp.siguiente
                        
                 
-            terminar = temp
+            terminar = temp     # Actualizo la vriable para terminar de ordenar
     
     
     def concatenar(self, lista):
