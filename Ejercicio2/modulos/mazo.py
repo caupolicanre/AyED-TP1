@@ -3,7 +3,7 @@ from cola_doble import ColaDoble
 class Mazo:
     
     def __init__(self):
-        self.mazo = ColaDoble
+        self.mazo = ColaDoble()
     
     def __str__(self):
         return str(self.mazo)
@@ -12,9 +12,13 @@ class Mazo:
         return iter(self.mazo)
     
     def agregar_carta(self, cartaNueva):
-        None
+        self.mazo.agregarFinal(cartaNueva)
 
     def jugar_carta(self, estadoCara="Boca abajo"):
-        None
+        cartaJugada = self.mazo.removerFinal()
+        cartaJugada.estadoCara = estadoCara
+        
+        return cartaJugada
     
-    def jugador_gana(self, )
+    def jugador_gana(self, cartasGanadas):
+        self.mazo

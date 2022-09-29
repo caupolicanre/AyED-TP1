@@ -25,16 +25,16 @@ class Carta:
         return self._numero
     
     @property
-    def boca_abajo(self):
-        return self.boca_abajo
-    
-    @property
     def cara(self):
         return self._cara
     
     @cara.setter
     def cara(self, nuevaCara):
         self._cara = nuevaCara
+        
+    @property
+    def jerarquia(self):
+        return self._jerarquia
     
 
         
