@@ -4,10 +4,6 @@ class ColaDoble():
     def  __init__(self):
         self.item = ListaDobleEnlazada()
         
-        
-    # Propiedades
-    
-    @property
     def tamanio(self):
         '''
         
