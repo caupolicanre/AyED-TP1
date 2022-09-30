@@ -21,7 +21,7 @@ for n in valores_n:
     toc = time.perf_counter()
     tiempo.append(toc-tic)
 
-print("Tamaño de la Lista Doble Enlazada:", lde._tamanio)
+print("Tamaño de la Lista Doble Enlazada:", lde.tamanio)
 
 '''Gráfico para tamaño de lista = 100'''
 
