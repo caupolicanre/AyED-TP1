@@ -1,6 +1,6 @@
 class Carta:
     
-    def __init__(self, palo, numero=0, jerarquia=0, cara="boca abajo"):
+    def __init__(self, palo, numero=0, jerarquia=0, cara="Boca abajo"):
         self._palo = palo
         self._numero = numero
         self._cara = cara
@@ -8,10 +8,10 @@ class Carta:
         
     
     def __str__(self):
-        if self._cara == "boca abajo":
+        if self._cara == "Boca abajo":
             return "-X"
         else:
-            return str(self._palo) + " " + str(self._numero)
+            return str(self._palo) + str(self._numero)
 
 
     # Propiedades
@@ -37,8 +37,13 @@ class Carta:
         return self._jerarquia
     
 
-        
+
+# Pruebas locales
+
 if __name__ == "__main__":
-    pruebaCarta=Carta(palo="corazon", numero=5,cara="boca abajo")
-    print(pruebaCarta)
     
+    carta1 = Carta(palo="♥", numero=5, cara="Boca abajo")
+    print(carta1)
+    
+    carta2 = Carta(palo="♠", numero=10, cara="Boca arriba")
+    print(carta2)
