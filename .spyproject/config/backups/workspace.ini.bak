@@ -8,5 +8,6 @@ recent_files = ['Ejercicio1\\module\\ListaDoble.py', 'Ejercicio1\\module\\nodo.p
 
 [main]
 version = 0.2.0
+
 recent_files = ['Ejercicio2\\modulos\\juego_guerra.py', 'Ejercicio2\\pruebas\\test_juego_guerra.py', 'Ejercicio2\\modulos\\mazo.py', 'Ejercicio2\\modulos\\carta.py', 'Ejercicio2\\modulos\\cola_doble.py']
 
