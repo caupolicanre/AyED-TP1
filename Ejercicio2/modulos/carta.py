@@ -1,18 +1,18 @@
-from nodo import Nodo
-
-class Carta(Nodo):
+class Carta:
     
-    def __init__(self, palo, numero):
+    def __init__(self, palo, numero=0, jerarquia=0, cara="Boca abajo"):
         self._palo = palo
         self._numero = numero
-        self.boca_abajo = None
-        self.boca_arriba = None
+        self._cara = cara
+        self._jerarquia = jerarquia 
+        
     
     def __str__(self):
-        return str(self._palo + " " + self._numero)
-    
-    def __repr__(self):
-        return str(self)
+        if self._cara == "Boca abajo":
+            return "-X"
+        else:
+            return str(self._palo) + str(self._numero)
+
 
     # Propiedades
     
@@ -25,17 +25,25 @@ class Carta(Nodo):
         return self._numero
     
     @property
-    def boca_abajo(self):
-        return self.boca_abajo
+    def cara(self):
+        return self._cara
     
-    @boca_abajo.setter
-    def boca_abajo(self, estado):
-        self.boca_abajo = estado
-
+    @cara.setter
+    def cara(self, nuevaCara):
+        self._cara = nuevaCara
+        
     @property
-    def boca_arriba(self):
-        return self.boca_arriba
+    def jerarquia(self):
+        return self._jerarquia
     
-    @boca_arriba.setter
-    def boca_arriba(self, estado):
-        self.boca_arriba = estado
+
+
+# Pruebas locales
+
+if __name__ == "__main__":
+    
+    carta1 = Carta(palo="♥", numero=5, cara="Boca abajo")
+    print(carta1)
+    
+    carta2 = Carta(palo="♠", numero=10, cara="Boca arriba")
+    print(carta2)
