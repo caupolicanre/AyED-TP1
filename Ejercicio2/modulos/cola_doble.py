@@ -109,13 +109,18 @@ class ColaDoble():
 
 
 if __name__=='__main__':
+    
     pruebaColaDoble= ColaDoble()
+    
     pruebaColaDoble.agregarFinal(25)
     pruebaColaDoble.agregarFinal(6)
     pruebaColaDoble.agregarFrente(8)
+    
     print(pruebaColaDoble)
     print(pruebaColaDoble.removerFinal())
+    
     print(pruebaColaDoble)
     print(pruebaColaDoble.removerFrente())
+    
     print(pruebaColaDoble)
     
