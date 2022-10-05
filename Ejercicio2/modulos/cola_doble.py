@@ -2,7 +2,7 @@ from LDE import ListaDobleEnlazada
 
 class ColaDoble():
     def  __init__(self):
-        self.item = ListaDobleEnlazada()
+        self.items = ListaDobleEnlazada()
         
     def tamanio(self):
         '''
@@ -14,7 +14,7 @@ class ColaDoble():
             Retorna tamaño de la Cola Doble.
 
         '''
-        return self.item._tamanio
+        return self.items._tamanio
     
     def __str__(self):
         '''
@@ -27,10 +27,10 @@ class ColaDoble():
             de la Cola Doble.
 
         '''
-        return self.item.__str__()
+        return self.items.__str__()
     
     def __iter__(self):
-        return iter(self.item)
+        return iter(self.items)
     
     def esta_vacia(self):
         '''
@@ -42,16 +42,16 @@ class ColaDoble():
             Devuelve True si la Lista está vacía.
         
         '''
-        return self.item.esta_vacia()
+        return self.items.esta_vacia()
     
     
     def agregarFrente(self,item):
         '''
-        Agrega un nuevo ítem al final de la Cola Doble.
+        Agrega un nuevo ítem al frente de la Cola Doble.
         
         Parameters
         ----------
-        item : any type
+        items : any type
             Dato que se va a almacenar en un nuevo Nodo.
        
         Returns
@@ -59,16 +59,16 @@ class ColaDoble():
         None.
         
         ''' 
-        return self.item.anexar(item)
+        return self.items.anexar(item)
     
     
     def agregarFinal(self,item):
         '''
-        Agrega un nuevo ítem al inicio de la Cola Doble.
+        Agrega un nuevo ítem al final de la Cola Doble.
        
         Parameters
         ----------
-        item : any type
+        items : any type
             Dato que se va a almacenar en un nuevo Nodo.
         
         Returns
@@ -77,25 +77,26 @@ class ColaDoble():
         None.
         
         ''' 
-        return self.item.agregar(item)
+        return self.items.agregar(item)
     
     
     def removerFrente(self):
         
         ''' 
-         Elimina y devuelve el ítem de la última posición.
+         Elimina y devuelve el ítem del frente de la Cola Doble.
         
          Returns
          -------
          temp : reference
              Retorna el ítem extraido de la Cola Doble.
+             
         '''
-        return self.item.extraer(self.item.tamanio-1)
+        return self.items.extraer(self.items.tamanio-1)
     
     
     def removerFinal(self):
        ''' 
-        Elimina y devuelve el ítem de la primera posición.
+        Elimina y devuelve el ítem del final de la Cola Doble.
        
         Returns
         -------
@@ -103,7 +104,7 @@ class ColaDoble():
             Retorna el ítem extraido de la Cola Doble.
             
        '''
-       return self.item.extraer(0)    
+       return self.items.extraer(0)    
         
     
 
