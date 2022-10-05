@@ -5,7 +5,7 @@ import random as rd
 
 class JuegoGuerra:
 
-    def __init__(self, seed):
+    def __init__(self, random_seed):
         # self.cantidad_turnos = cant_turnos 
         # self.turnos_jugados = 0
         # self.ganador = None
@@ -15,7 +15,7 @@ class JuegoGuerra:
         self.mazo_jugador1 = Mazo()
         self.mazo_jugador2 = Mazo()
         
-        self._semilla = seed
+        self._semilla = random_seed
         
     
     # Propiedades
