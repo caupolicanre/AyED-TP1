@@ -31,6 +31,9 @@ class Nodo:
         self._anterior = None
         self._siguiente = None
     
+    
+    # Métodos Mágicos
+    
     def __str__(self):
         '''
         Cuando se realiza un "print", retorna un string del dato 
@@ -48,7 +51,7 @@ class Nodo:
         return str(self.dato)
     
     
-    # Propiedades
+    # Atributos
     
     @property
     def dato(self):
@@ -163,7 +166,7 @@ class ListaDobleEnlazada:
         self._tamanio = 0   # Contador para el tamaño de la lista
     
     
-    # Propiedades
+    # Atributos
     
     @property
     def cabeza(self):
@@ -241,6 +244,7 @@ class ListaDobleEnlazada:
         return self._tamanio
     
     
+    # Métodos Mágicos
     
     def __str__(self):
         '''
@@ -281,7 +285,7 @@ class ListaDobleEnlazada:
 
         
     
-    # Métodos / Funciones
+    # Métodos
 
     def esta_vacia(self):
         '''
@@ -502,6 +506,7 @@ class ListaDobleEnlazada:
             self._tamanio-=1
             return temp
         
+        
     def copiar(self):
         '''
         Realiza una copia de la lista elemento a elemento
@@ -521,6 +526,7 @@ class ListaDobleEnlazada:
             temp = temp.siguiente
         
         return nuevaLista
+    
     
     def invertir(self):
         '''
@@ -556,6 +562,7 @@ class ListaDobleEnlazada:
         return self
     
     
+    '''HACER DE 0'''
     def ordenar(self):
         '''
         Ordena los elementos de la lista de "menor a mayor".
@@ -694,7 +701,6 @@ if __name__ == "__main__":
     # Printeo la cola para hacer un seguimiento
     print("Lista 2 Cola:", lista2.cola)
     
-    # CORREGIR. Inserta en la penúltima posición, pero el TEST CORRE
     print("\nInserto al final de la lista 2:")
     lista2.insertar(lista2.tamanio-1, 101) # Se inserta en el item en la posición 3
     print(lista2)
