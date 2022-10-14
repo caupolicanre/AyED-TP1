@@ -504,7 +504,7 @@ class ListaDobleEnlazada:
             nodoExtraer.siguiente.anterior = nodoExtraer.anterior   # Elimino la referencia que tiene el Nodo siguiente y la reemplazo por la referencia al Nodo anterior del que se extrajo
             
             self._tamanio-=1
-            return temp
+            return temp         # Retorno el Nodo extraido
         
         
     def copiar(self):
@@ -538,26 +538,18 @@ class ListaDobleEnlazada:
             Retorna la Lista Doble Enlazada Invertida.
 
         '''
-        # Guardo la cabeza vieja para actualizarla como cola de la Lista invertida
-        cabezaTemp = self.cabeza
         
-        nodo1 = self.cabeza     # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
-        nodo2 = nodo1.siguiente # Asigno el Nodo siguiente a la cabeza para comenzar el intercambio
-        
-        # Intercambio los Nodos
-        nodo1.siguiente = None
-        nodo1.anterior = nodo2
-        
-        # Bucle para repetir el intercambio de Nodos hasta que el Nodo 2 sea igual a None, por ende llegó a la cola
-        while nodo2 != None:
-            nodo2.anterior = nodo2.siguiente
-            nodo2.siguiente = nodo1
-            nodo1 = nodo2
-            nodo2 = nodo2.anterior
-
         # Actualizo la cabeza y cola de la Lista
-        self.cabeza = nodo1
-        self.cola = cabezaTemp
+        tempCabeza = self.cabeza
+        self.cabeza = self.cola
+        self.cola = tempCabeza
+        
+        # Invierto los enlaces de cada Nodo de la Lista
+        for nodo in self:
+            tempNodoAnterior = nodo.anterior
+            nodo.anterior = nodo.siguiente
+            nodo.siguiente = tempNodoAnterior
+
         
         return self
     
@@ -686,6 +678,10 @@ if __name__ == "__main__":
     # INSERTAR FUNCIONA
     # =================
     
+    print("\n========")
+    print("INSERTAR")
+    print("========")
+    
     # Muestro la lista 2 antes y después de insertarle un elemento
     print("\nLista 2 Inicializada con valores por medio de agregar:\n", lista2)
     lista2.insertar(3, "Fito Paez") # Se inserta el item en el índice 3
@@ -710,6 +706,10 @@ if __name__ == "__main__":
     # =================================
     # TODO EL EXTRAER FUNCIONA PERFECTO
     # =================================
+    
+    print("\n\n=======")
+    print("EXTRAER")
+    print("=======")
     
     #Muestro las 2 listas y pregunto si están vacías
     print("\n\nLista 1:", lista1)
@@ -747,8 +747,12 @@ if __name__ == "__main__":
     # COPIAR FUNCIONA
     # ===============
     
+    print("\n\n======")
+    print("COPIAR")
+    print("======")
+    
     # Lista 2 Original
-    print("\n\nLista 2 Original:\n", lista2)
+    print("\nLista 2 Original:\n", lista2)
     print("Lista 2 Copiada:\n", lista2.copiar())
     
     
@@ -756,13 +760,21 @@ if __name__ == "__main__":
     # INVERTIR FUNCIONA
     # =================
     
-    print("\n\nLista 2 Original:\n", lista2)
+    print("\n\n========")
+    print("INVERTIR")
+    print("========")
+    
+    print("\nLista 2 Original:\n", lista2)
     print("Lista 2 Invertida:\n", lista2.invertir())
     
     
     # =============
     # CONCATENAR
     # =============
+    
+    print("\n\n==========")
+    print("CONCATENAR")
+    print("==========")
     
     # Agrego algunos elementos a la lista 1 para poder concatenarla con la lista 2
     lista1.agregar(91)
@@ -783,6 +795,10 @@ if __name__ == "__main__":
     # ========
     # ORDENAR
     # ========
+    
+    print("\n\n=======")
+    print("ORDENAR")
+    print("=======")
     
     lista4 = ListaDobleEnlazada()
     lista4.agregar(2)
