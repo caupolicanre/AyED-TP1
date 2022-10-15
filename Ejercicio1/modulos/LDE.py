@@ -51,6 +51,7 @@ class Nodo:
         return str(self.dato)
     
     
+    
     # Atributos
     
     @property
@@ -283,7 +284,44 @@ class ListaDobleEnlazada:
         '''
         return self.concatenar(lista)
 
+    def __getitem__(self, indice):
+        '''
+        Método para acceder a un Nodo de la Lista por medio
+        de un índice.
+
+        Parameters
+        ----------
+        indice : int
+            Índice al cuál se va a acceder.
+
+        Raises
+        ------
+        IndexError
+            Si el índice se encuentra fuera del rango de la lista,
+            retorna un error de índice.
+
+        Returns
+        -------
+        any type
+            Retorna el Nodo que se encuentra en el índice recibido.
+
+        '''
         
+        if indice >= 0 and indice < self.tamanio:
+            '''El índice está dentro del rango de la lista'''
+            
+            nodoActual = self.cabeza
+            
+            # Bucle para recorrer los Nodos de la Lista
+            for _ in range(indice):
+                nodoActual = nodoActual.siguiente
+                
+            return nodoActual
+        
+        else:
+            '''El índice está fuera del rango de la lista'''
+            raise IndexError("Índice no válido. Valor fuera de rango.")        
+
     
     # Métodos
 
@@ -555,51 +593,87 @@ class ListaDobleEnlazada:
     
     
     '''HACER DE 0'''
-    def ordenar(self):
-        '''
-        Ordena los elementos de la lista de "menor a mayor".
+    # def ordenar(self):
+    #     '''
+    #     Ordena los elementos de la lista de "menor a mayor".
 
-        Returns
-        -------
-        None.
+    #     Returns
+    #     -------
+    #     None.
 
-        '''
+    #     '''
         
-        terminar = None
+    #     terminar = None
         
-        while self.cabeza != terminar:
-            nodoActual = self.cabeza
-            temp = self.cabeza
+    #     while self.cabeza != terminar:
+    #         nodoActual = self.cabeza
+    #         temp = self.cabeza
             
-            while temp.siguiente != terminar:   # Cuando llegue a la cola, temp.siguiente == None, por ende va a salir del bucle
-                cambiar = temp.siguiente        # Almaceno el Nodo siguiente a "temp" para poder compararlos
+    #         while temp.siguiente != terminar:   # Cuando llegue a la cola, temp.siguiente == None, por ende va a salir del bucle
+    #             cambiar = temp.siguiente        # Almaceno el Nodo siguiente a "temp" para poder compararlos
                 
-                if temp.dato > cambiar.dato:    # Si el Nodo de la izquierda (temp) es mayor al de la derecha (cambiar), desplaza hacia la derecha el primer Nodo (temp)
-                    # Desplazamiento del Nodo mayor (temp)
+    #             if temp.dato > cambiar.dato:    # Si el Nodo de la izquierda (temp) es mayor al de la derecha (cambiar), desplaza hacia la derecha el primer Nodo (temp)
+    #                 # Desplazamiento del Nodo mayor (temp)
                     
-                    temp.siguiente = cambiar.siguiente
-                    temp.anterior = cambiar
+    #                 temp.siguiente = cambiar.siguiente
+    #                 temp.anterior = cambiar
                     
-                    cambiar.siguiente = temp
+    #                 cambiar.siguiente = temp
                     
-                    if temp != self.cabeza:
-                        nodoActual.siguiente = cambiar
-                    else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
-                        self.cabeza = cambiar   # Actualizo la cabeza nueva
+    #                 if temp != self.cabeza:
+    #                     nodoActual.siguiente = cambiar
+    #                 else:                       # La primera vez del bucle entra a este else, y actualiza la cabeza con
+    #                     self.cabeza = cambiar   # Actualizo la cabeza nueva
                     
-                    aux = temp
-                    temp = cambiar
-                    cambiar = aux
+    #                 aux = temp
+    #                 temp = cambiar
+    #                 cambiar = aux
                     
-                    # Actualizo la cola nueva
-                    self.cola = cambiar
+    #                 # Actualizo la cola nueva
+    #                 self.cola = cambiar
                     
                 
-                nodoActual = temp
-                temp = temp.siguiente
+    #             nodoActual = temp
+    #             temp = temp.siguiente
                        
                 
-            terminar = temp     # Actualizo la vriable para terminar de ordenar
+    #         terminar = temp     # Actualizo la vriable para terminar de ordenar
+    
+    
+    # '''ORDENAR NUEVO'''
+    # def ordenar(self):
+    #     ''
+        
+    #     # Bucle para recorrer toda la lista
+    #     for indice in range (1, self.tamanio):
+            
+    #         datoActual = self[indice].dato
+    #         posicion = indice
+            
+    #         while posicion > 0 and self[indice-1].dato > datoActual:
+    #             self[posicion].dato = self[posicion-1].dato
+    #             posicion = posicion - 1
+            
+    #         self[posicion].dato = datoActual
+            
+    
+    '''ORDENAR NUEVO 2'''
+    def ordenar(self):
+        ''
+        
+        # Bucle para recorrer toda la lista
+        for indice in range (1, self.tamanio):
+            
+            datoActual = self[indice].dato
+            
+            posicion = indice-1
+            
+            while posicion >= 0 and self[posicion].dato > datoActual:
+                self[posicion+1].dato = self[posicion].dato
+                posicion = posicion - 1
+            
+            self[posicion+1].dato = datoActual
+    
     
     
     def concatenar(self, lista):
@@ -792,6 +866,19 @@ if __name__ == "__main__":
     print("\nLista concatenada:", lista1+lista3)
     
     
+        # ========
+    # GET ITEM
+    # ========
+    print("\n\n=======")
+    print("GET ITEM")
+    print("=======")
+    
+    print(f"\nLista 1: {lista1}\n")
+    print("Lista1[0]:", lista1[0])
+    print("Lista1[1]:", lista1[1])
+    print("Lista1[2]:", lista1[2])
+    
+    
     # ========
     # ORDENAR
     # ========
@@ -812,3 +899,4 @@ if __name__ == "__main__":
     print("\nLista ordenada de menor a mayor:\n", lista4)
     print("Cabeza nueva:", lista4.cabeza)
     print("Cola nueva:", lista4.cola)
+    
