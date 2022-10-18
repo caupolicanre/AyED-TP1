@@ -592,7 +592,10 @@ class ListaDobleEnlazada:
         return self
     
     
-    '''HACER DE 0'''
+    '''
+    ODENAR VIEJO
+    Funciona, pero la correción decía que es por burbujeo, no por inserción
+    '''
     # def ordenar(self):
     #     '''
     #     Ordena los elementos de la lista de "menor a mayor".
@@ -638,26 +641,13 @@ class ListaDobleEnlazada:
                        
                 
     #         terminar = temp     # Actualizo la vriable para terminar de ordenar
-    
-    
-    # '''ORDENAR NUEVO'''
-    # def ordenar(self):
-    #     ''
-        
-    #     # Bucle para recorrer toda la lista
-    #     for indice in range (1, self.tamanio):
-            
-    #         datoActual = self[indice].dato
-    #         posicion = indice
-            
-    #         while posicion > 0 and self[indice-1].dato > datoActual:
-    #             self[posicion].dato = self[posicion-1].dato
-    #             posicion = posicion - 1
-            
-    #         self[posicion].dato = datoActual
             
     
-    '''ORDENAR NUEVO 2'''
+    '''
+    ORDENAR NUEVO - FUNCIONA
+    Funciona por Inserción, pero está intercambiando los datos, tiene que intercambiar
+    las referencias de los Nodos.
+    '''
     def ordenar(self):
         ''
         
@@ -668,12 +658,47 @@ class ListaDobleEnlazada:
             
             posicion = indice-1
             
+            # Bucle para encontrar la posición del Nodo
             while posicion >= 0 and self[posicion].dato > datoActual:
                 self[posicion+1].dato = self[posicion].dato
                 posicion = posicion - 1
             
             self[posicion+1].dato = datoActual
     
+    
+    '''
+    ORDENAR NUEVO 2 - NO FUNCIONA
+    Inteno modificar el ordenar anterior,
+    pero que intercambie referencias, no los datos
+    '''
+    # def ordenar(self):
+    #     ''
+        
+    #     # Bucle para recorrer toda la lista
+    #     for indice in range (1, self.tamanio):
+            
+    #         nodoActual = self[indice]
+            
+    #         temp = indice-1     # Índice del Nodo que se encuentra antes de nodoActual
+            
+    #         # Bucle para encontrar la posición del Nodo
+    #         while temp >= 0 and self[temp].dato > nodoActual.dato:
+    #             # self[temp+1].dato = self[temp].dato
+                
+    #             tempAnterior = nodoActual.anterior
+    #             tempSiguiente = nodoActual.siguiente
+                
+    #             nodoActual.anterior = self[temp].anterior
+    #             nodoActual.siguiente = self[temp].siguiente
+                
+    #             temp -= 1
+                
+    #         self[temp].anterior = tempAnterior
+    #         self[temp].siguiente = tempSiguiente
+    
+            
+    #         '''Print para comprobar la lista'''
+    #         print(self)
     
     
     def concatenar(self, lista):

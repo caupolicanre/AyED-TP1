@@ -23,24 +23,6 @@ for n in valores_n:
 
 print("Tamaño de la Lista Doble Enlazada:", lde.tamanio)
 
-'''Gráfico para tamaño de lista = 100'''
-
-# plt.clf()
-# plt.title('Tiempos en fn. del nro de elementos - Ordenamiento Por Inserción\n', loc = "center", fontdict = {'fontsize':14, 'fontweight':'bold'})
-
-# plt.plot(valores_n, tiempo, label="Ordenamiento por Inserción")
-# plt.legend()
-
-# plt.xlabel("tamaño (n)")
-# plt.xlim(0,110)
-# plt.xticks(range(0,101,20))
-
-# plt.ylabel("tiempo (s)")
-# plt.ylim(0.00,0.10)
-# plt.yticks(range(0.0,0.11,0.05))
-
-# plt.show
-
 
 '''Gráfico para tamaño de lista = 1000'''
 
@@ -54,6 +36,6 @@ plt.xlabel("tamaño (n)")
 plt.xticks(range(0,1001,200))
 
 plt.ylabel("tiempo (s)")
-plt.yticks(range(0.000,0.021,0.005))
+plt.yticks(range(0.000,0.310,0.050))
 
 plt.show
