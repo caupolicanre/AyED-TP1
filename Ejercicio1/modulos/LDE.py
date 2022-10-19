@@ -284,43 +284,43 @@ class ListaDobleEnlazada:
         '''
         return self.concatenar(lista)
 
-    # def __getitem__(self, indice):
-    #     '''
-    #     Método para acceder a un Nodo de la Lista por medio
-    #     de un índice.
+    def __getitem__(self, indice):
+        '''
+        Método para acceder a un Nodo de la Lista por medio
+        de un índice.
 
-    #     Parameters
-    #     ----------
-    #     indice : int
-    #         Índice al cuál se va a acceder.
+        Parameters
+        ----------
+        indice : int
+            Índice al cuál se va a acceder.
 
-    #     Raises
-    #     ------
-    #     IndexError
-    #         Si el índice se encuentra fuera del rango de la lista,
-    #         retorna un error de índice.
+        Raises
+        ------
+        IndexError
+            Si el índice se encuentra fuera del rango de la lista,
+            retorna un error de índice.
 
-    #     Returns
-    #     -------
-    #     any type
-    #         Retorna el Nodo que se encuentra en el índice recibido.
+        Returns
+        -------
+        any type
+            Retorna el Nodo que se encuentra en el índice recibido.
 
-    #     '''
+        '''
         
-    #     if indice >= 0 and indice < self.tamanio:
-    #         '''El índice está dentro del rango de la lista'''
+        if indice >= 0 and indice < self.tamanio:
+            '''El índice está dentro del rango de la lista'''
             
-    #         nodoActual = self.cabeza
+            nodoActual = self.cabeza
             
-    #         # Bucle para recorrer los Nodos de la Lista
-    #         for _ in range(indice):
-    #             nodoActual = nodoActual.siguiente
+            # Bucle para recorrer los Nodos de la Lista
+            for _ in range(indice):
+                nodoActual = nodoActual.siguiente
                 
-    #         return nodoActual
+            return nodoActual
         
-    #     else:
-    #         '''El índice está fuera del rango de la lista'''
-    #         raise IndexError("Índice no válido. Valor fuera de rango.")        
+        else:
+            '''El índice está fuera del rango de la lista'''
+            raise IndexError("Índice no válido. Valor fuera de rango.")        
 
     
     # Métodos
@@ -640,7 +640,7 @@ class ListaDobleEnlazada:
                 temp = temp.siguiente
                        
                 
-            terminar = temp     # Actualizo la vriable para terminar de ordenar
+            terminar = temp     # Actualizo la variable para terminar de ordenar
             
     
     '''
@@ -666,11 +666,11 @@ class ListaDobleEnlazada:
     #         self[posicion+1].dato = datoActual
     
     
-    # '''
-    # ORDENAR NUEVO 2 - NO FUNCIONA
-    # Inteno modificar el ordenar anterior,
-    # pero que intercambie referencias, no los datos
-    # '''
+    '''
+    ORDENAR NUEVO 2 - NO FUNCIONA
+    Inteno modificar el ordenar anterior,
+    pero que intercambie referencias, no los datos
+    '''
     # def ordenar(self):
     #     ''
         
