@@ -593,7 +593,7 @@ class ListaDobleEnlazada:
     
     
     '''
-    ODENAR VIEJO
+    ODENAR VIEJO (Burbuja) - Se presenta este
     Funciona, pero la correción decía que es por burbujeo, no por inserción
     '''
     def ordenar(self):
@@ -644,7 +644,7 @@ class ListaDobleEnlazada:
             
     
     '''
-    ORDENAR NUEVO - FUNCIONA
+    ORDENAR NUEVO (INSERCIÓN) - FUNCIONA (No tiene que intercambiar lps datos)
     Funciona por Inserción, pero está intercambiando los datos, tiene que intercambiar
     las referencias de los Nodos.
     '''
@@ -667,7 +667,7 @@ class ListaDobleEnlazada:
     
     
     '''
-    ORDENAR NUEVO 2 - NO FUNCIONA
+    ORDENAR NUEVO 2 (INSERCIÓN) - NO FUNCIONA
     Inteno modificar el ordenar anterior,
     pero que intercambie referencias, no los datos
     '''
