@@ -6,7 +6,6 @@ import time
 import matplotlib.pyplot as plt
 
 # Genero 1000 valores para probar el Ordenamiento
-# valores_n = [10**i for i in range(1,4)] # Si es más de 4 el final del rango, consume mucha memoria y tarda en compilar
 valores_n = range(0, 1001, 100)
 tiempo = []
 
@@ -38,5 +37,6 @@ plt.xlabel("tamaño (n)")
 plt.xlim(-100, 1100)
 
 plt.ylabel("tiempo (s)")
+plt.ylim()
 
 plt.show
