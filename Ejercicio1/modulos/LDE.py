@@ -51,6 +51,7 @@ class Nodo:
         return str(self.dato)
     
     
+    
     # Atributos
     
     @property
@@ -155,9 +156,11 @@ class ListaDobleEnlazada:
         '''
         Atributos de la Lista Doble Enlazada
 
-        Returns
+        Atributos
         -------
-        None.
+        cabeza = reference
+        cola = reference
+        tamanio = int
 
         '''
         
@@ -283,7 +286,44 @@ class ListaDobleEnlazada:
         '''
         return self.concatenar(lista)
 
+    def __getitem__(self, indice):
+        '''
+        Método para acceder a un Nodo de la Lista por medio
+        de un índice.
+
+        Parameters
+        ----------
+        indice : int
+            Índice al cuál se va a acceder.
+
+        Raises
+        ------
+        IndexError
+            Si el índice se encuentra fuera del rango de la lista,
+            retorna un error de índice.
+
+        Returns
+        -------
+        any type
+            Retorna el Nodo que se encuentra en el índice recibido.
+
+        '''
         
+        if indice >= 0 and indice < self.tamanio:
+            '''El índice está dentro del rango de la lista'''
+            
+            nodoActual = self.cabeza
+            
+            # Bucle para recorrer los Nodos de la Lista
+            for _ in range(indice):
+                nodoActual = nodoActual.siguiente
+                
+            return nodoActual
+        
+        else:
+            '''El índice está fuera del rango de la lista'''
+            raise IndexError("Índice no válido. Valor fuera de rango.")        
+
     
     # Métodos
 
@@ -504,7 +544,7 @@ class ListaDobleEnlazada:
             nodoExtraer.siguiente.anterior = nodoExtraer.anterior   # Elimino la referencia que tiene el Nodo siguiente y la reemplazo por la referencia al Nodo anterior del que se extrajo
             
             self._tamanio-=1
-            return temp
+            return temp         # Retorno el Nodo extraido
         
         
     def copiar(self):
@@ -538,31 +578,26 @@ class ListaDobleEnlazada:
             Retorna la Lista Doble Enlazada Invertida.
 
         '''
-        # Guardo la cabeza vieja para actualizarla como cola de la Lista invertida
-        cabezaTemp = self.cabeza
         
-        nodo1 = self.cabeza     # Asigno el primer Nodo como cabeza para comenzar a inveritr desde el inicio hacia el final
-        nodo2 = nodo1.siguiente # Asigno el Nodo siguiente a la cabeza para comenzar el intercambio
-        
-        # Intercambio los Nodos
-        nodo1.siguiente = None
-        nodo1.anterior = nodo2
-        
-        # Bucle para repetir el intercambio de Nodos hasta que el Nodo 2 sea igual a None, por ende llegó a la cola
-        while nodo2 != None:
-            nodo2.anterior = nodo2.siguiente
-            nodo2.siguiente = nodo1
-            nodo1 = nodo2
-            nodo2 = nodo2.anterior
-
         # Actualizo la cabeza y cola de la Lista
-        self.cabeza = nodo1
-        self.cola = cabezaTemp
+        tempCabeza = self.cabeza
+        self.cabeza = self.cola
+        self.cola = tempCabeza
+        
+        # Invierto los enlaces de cada Nodo de la Lista
+        for nodo in self:
+            tempNodoAnterior = nodo.anterior
+            nodo.anterior = nodo.siguiente
+            nodo.siguiente = tempNodoAnterior
+
         
         return self
     
     
-    '''HACER DE 0'''
+    '''
+    ODENAR VIEJO (Burbuja) - Se presenta este
+    Funciona, pero la correción decía que es por burbujeo, no por inserción
+    '''
     def ordenar(self):
         '''
         Ordena los elementos de la lista de "menor a mayor".
@@ -607,7 +642,65 @@ class ListaDobleEnlazada:
                 temp = temp.siguiente
                        
                 
-            terminar = temp     # Actualizo la vriable para terminar de ordenar
+            terminar = temp     # Actualizo la variable para terminar de ordenar
+            
+    
+    '''
+    ORDENAR NUEVO (INSERCIÓN) - FUNCIONA (No tiene que intercambiar lps datos)
+    Funciona por Inserción, pero está intercambiando los datos, tiene que intercambiar
+    las referencias de los Nodos.
+    '''
+    # def ordenar(self):
+    #     ''
+        
+    #     # Bucle para recorrer toda la lista
+    #     for indice in range (1, self.tamanio):
+            
+    #         datoActual = self[indice].dato
+            
+    #         posicion = indice-1
+            
+    #         # Bucle para encontrar la posición del Nodo
+    #         while posicion >= 0 and self[posicion].dato > datoActual:
+    #             self[posicion+1].dato = self[posicion].dato
+    #             posicion = posicion - 1
+            
+    #         self[posicion+1].dato = datoActual
+    
+    
+    '''
+    ORDENAR NUEVO 2 (INSERCIÓN) - NO FUNCIONA
+    Inteno modificar el ordenar anterior,
+    pero que intercambie referencias, no los datos
+    '''
+    # def ordenar(self):
+    #     ''
+        
+    #     # Bucle para recorrer toda la lista
+    #     for indice in range (1, self.tamanio):
+            
+    #         nodoActual = self[indice]
+            
+    #         temp = indice-1     # Índice del Nodo que se encuentra antes de nodoActual
+            
+    #         # Bucle para encontrar la posición del Nodo
+    #         while temp >= 0 and self[temp].dato > nodoActual.dato:
+    #             # self[temp+1].dato = self[temp].dato
+                
+    #             tempAnterior = nodoActual.anterior
+    #             tempSiguiente = nodoActual.siguiente
+                
+    #             nodoActual.anterior = self[temp].anterior
+    #             nodoActual.siguiente = self[temp].siguiente
+                
+    #             temp -= 1
+                
+    #         self[temp].anterior = tempAnterior
+    #         self[temp].siguiente = tempSiguiente
+    
+            
+    #         '''Print para comprobar la lista'''
+    #         print(self)
     
     
     def concatenar(self, lista):
@@ -686,6 +779,10 @@ if __name__ == "__main__":
     # INSERTAR FUNCIONA
     # =================
     
+    print("\n========")
+    print("INSERTAR")
+    print("========")
+    
     # Muestro la lista 2 antes y después de insertarle un elemento
     print("\nLista 2 Inicializada con valores por medio de agregar:\n", lista2)
     lista2.insertar(3, "Fito Paez") # Se inserta el item en el índice 3
@@ -710,6 +807,10 @@ if __name__ == "__main__":
     # =================================
     # TODO EL EXTRAER FUNCIONA PERFECTO
     # =================================
+    
+    print("\n\n=======")
+    print("EXTRAER")
+    print("=======")
     
     #Muestro las 2 listas y pregunto si están vacías
     print("\n\nLista 1:", lista1)
@@ -747,8 +848,12 @@ if __name__ == "__main__":
     # COPIAR FUNCIONA
     # ===============
     
+    print("\n\n======")
+    print("COPIAR")
+    print("======")
+    
     # Lista 2 Original
-    print("\n\nLista 2 Original:\n", lista2)
+    print("\nLista 2 Original:\n", lista2)
     print("Lista 2 Copiada:\n", lista2.copiar())
     
     
@@ -756,13 +861,21 @@ if __name__ == "__main__":
     # INVERTIR FUNCIONA
     # =================
     
-    print("\n\nLista 2 Original:\n", lista2)
+    print("\n\n========")
+    print("INVERTIR")
+    print("========")
+    
+    print("\nLista 2 Original:\n", lista2)
     print("Lista 2 Invertida:\n", lista2.invertir())
     
     
     # =============
     # CONCATENAR
     # =============
+    
+    print("\n\n==========")
+    print("CONCATENAR")
+    print("==========")
     
     # Agrego algunos elementos a la lista 1 para poder concatenarla con la lista 2
     lista1.agregar(91)
@@ -780,9 +893,26 @@ if __name__ == "__main__":
     print("\nLista concatenada:", lista1+lista3)
     
     
+        # ========
+    # GET ITEM
+    # ========
+    print("\n\n=======")
+    print("GET ITEM")
+    print("=======")
+    
+    print(f"\nLista 1: {lista1}\n")
+    print("Lista1[0]:", lista1[0])
+    print("Lista1[1]:", lista1[1])
+    print("Lista1[2]:", lista1[2])
+    
+    
     # ========
     # ORDENAR
     # ========
+    
+    print("\n\n=======")
+    print("ORDENAR")
+    print("=======")
     
     lista4 = ListaDobleEnlazada()
     lista4.agregar(2)
@@ -796,3 +926,4 @@ if __name__ == "__main__":
     print("\nLista ordenada de menor a mayor:\n", lista4)
     print("Cabeza nueva:", lista4.cabeza)
     print("Cola nueva:", lista4.cola)
+    
