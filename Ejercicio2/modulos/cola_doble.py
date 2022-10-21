@@ -1,3 +1,4 @@
+# Importo la LDE para inicializar la Cola Doble
 from LDE import ListaDobleEnlazada
 
 class ColaDoble():
@@ -6,7 +7,7 @@ class ColaDoble():
         
     def tamanio(self):
         '''
-        
+        Método para conocer el tamaño de la Cola Doble.
 
         Returns
         -------
@@ -18,7 +19,7 @@ class ColaDoble():
     
     def __str__(self):
         '''
-        
+        Muestra todos los Nodos de la Coal Doble.
 
         Returns
         -------
@@ -30,6 +31,9 @@ class ColaDoble():
         return self.items.__str__()
     
     def __iter__(self):
+        '''
+        Método para iterar la Cola Doble.
+        '''
         return iter(self.items)
     
     def esta_vacia(self):
@@ -45,13 +49,13 @@ class ColaDoble():
         return self.items.esta_vacia()
     
     
-    def agregarFrente(self,item):
+    def agregarFrente(self, item):
         '''
         Agrega un nuevo ítem al frente de la Cola Doble.
         
         Parameters
         ----------
-        items : any type
+        item : any type
             Dato que se va a almacenar en un nuevo Nodo.
        
         Returns
@@ -62,7 +66,7 @@ class ColaDoble():
         return self.items.anexar(item)
     
     
-    def agregarFinal(self,item):
+    def agregarFinal(self, item):
         '''
         Agrega un nuevo ítem al final de la Cola Doble.
        
@@ -73,7 +77,6 @@ class ColaDoble():
         
         Returns
         -------
-       
         None.
         
         ''' 
@@ -81,9 +84,9 @@ class ColaDoble():
     
     
     def removerFrente(self):
-        
         ''' 
-         Elimina y devuelve el ítem del frente de la Cola Doble.
+         Elimina el ítem del frente de la Cola Doble 
+         y lo devuelve.
         
          Returns
          -------
@@ -96,7 +99,8 @@ class ColaDoble():
     
     def removerFinal(self):
        ''' 
-        Elimina y devuelve el ítem del final de la Cola Doble.
+        Elimina el ítem del final de la Cola Doble 
+        y lo devuelve.
        
         Returns
         -------
