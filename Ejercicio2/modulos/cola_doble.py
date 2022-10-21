@@ -1,5 +1,5 @@
 # Importo la LDE para inicializar la Cola Doble
-from LDE import ListaDobleEnlazada
+from Ejercicio1.modulos.LDE import ListaDobleEnlazada
 
 class ColaDoble():
     def  __init__(self):
