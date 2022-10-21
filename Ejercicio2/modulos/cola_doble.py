@@ -19,7 +19,7 @@ class ColaDoble():
     
     def __str__(self):
         '''
-        Muestra todos los Nodos de la Coal Doble.
+        Muestra todos los Nodos de la Cola Doble.
 
         Returns
         -------
@@ -38,12 +38,13 @@ class ColaDoble():
     
     def esta_vacia(self):
         '''
-        Comprueba si el tamaño de la Lista es igual a 0.
+        Comprueba si el tamaño de la Cola Doble
+        es igual a 0.
         
         Returns
         -------
         boolean
-            Devuelve True si la Lista está vacía.
+            Devuelve True si la Cola Doble está vacía.
         
         '''
         return self.items.esta_vacia()
