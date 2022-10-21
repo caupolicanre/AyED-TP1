@@ -1,3 +1,4 @@
+# Importo Cola Doble para la implementación del Mazo
 from cola_doble import ColaDoble
 
 # Importaciones para pruebas locales
@@ -10,11 +11,16 @@ class Mazo:
     def __init__(self):
         self.mazo = ColaDoble()
     
+    # Métodos Mágicos
+    
     def __str__(self):
         return self.mazo.__str__()
     
     def __iter__(self):
         return iter(self.mazo)
+    
+    
+    # Métodos
     
     def agregar_carta(self, cartaNueva):
         '''
@@ -61,6 +67,7 @@ class Mazo:
 
 
 
+
 # Pruebas locales
 
 if __name__ == "__main__":
@@ -81,7 +88,7 @@ if __name__ == "__main__":
         jerarquia+=1    # Aumento la jerarquía por cada iteración
         
         for palo in palos:
-            carta = Carta(palo, numero, jerarquia, "Boca abajo")  # Creo una carta y le paso los parámetros correspondientes
+            carta = Carta(palo, numero, jerarquia, "Boca arriba")  # Creo una carta y le paso los parámetros correspondientes
             cartas.append(carta)    # Agrego la carta a la lista de cartas para crear luego el mazo
         
     rd.shuffle(cartas)      # Mezclo las cartas

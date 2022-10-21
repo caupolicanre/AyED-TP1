@@ -97,9 +97,15 @@ class JuegoGuerra:
             si es impar, la carta va al mazo del Jugador 2.
             '''
             if i%2 == 0:
+                '''
+                Reparte carta al Jugador 1.
+                '''
                 self.mazo_jugador1.agregar_carta(carta)
                 
             if i%2 != 0:
+                '''
+                Reparte carta al Jugador 2.
+                '''
                 self.mazo_jugador2.agregar_carta(carta)
                 
         return self.mazo_jugador1, self.mazo_jugador2
