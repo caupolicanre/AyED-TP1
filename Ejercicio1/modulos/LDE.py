@@ -156,9 +156,11 @@ class ListaDobleEnlazada:
         '''
         Atributos de la Lista Doble Enlazada
 
-        Returns
+        Atributos
         -------
-        None.
+        cabeza = reference
+        cola = reference
+        tamanio = int
 
         '''
         
