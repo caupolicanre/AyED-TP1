@@ -28,7 +28,8 @@ class ColaDoble():
             de la Cola Doble.
 
         '''
-        return self.items.__str__()
+        lista = [str(nodo) for nodo in self]
+        return str(lista)
     
     def __iter__(self):
         '''
