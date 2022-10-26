@@ -14,7 +14,7 @@ class Mazo:
     # Métodos Mágicos
     
     def __str__(self):
-        return self.mazo.__str__()
+        return str(self.mazo)
     
     def __iter__(self):
         return iter(self.mazo)
