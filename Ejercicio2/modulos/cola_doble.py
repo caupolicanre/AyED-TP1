@@ -87,13 +87,13 @@ class ColaDoble():
     
     def removerFrente(self):
         ''' 
-         Elimina el ítem del frente de la Cola Doble 
-         y lo devuelve.
+        Elimina el ítem del frente de la Cola Doble 
+        y lo devuelve.
         
-         Returns
-         -------
-         temp : reference
-             Retorna el ítem extraido de la Cola Doble.
+        Returns
+        -------
+        temp : reference
+            Retorna el ítem extraido de la Cola Doble.
              
         '''
         return self.items.extraer(self.items.tamanio-1)
@@ -101,13 +101,13 @@ class ColaDoble():
     
     def removerFinal(self):
        ''' 
-        Elimina el ítem del final de la Cola Doble 
-        y lo devuelve.
+       Elimina el ítem del final de la Cola Doble 
+       y lo devuelve.
        
-        Returns
-        -------
-        temp : reference
-            Retorna el ítem extraido de la Cola Doble.
+       Returns
+       -------
+       temp : reference
+           Retorna el ítem extraido de la Cola Doble.
             
        '''
        return self.items.extraer(0)    
