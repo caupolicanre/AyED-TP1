@@ -287,7 +287,7 @@ class ListaDobleEnlazada:
         '''
         return self.concatenar(lista)
     
-    def __lt__(self, n1: Nodo()):
+    def __lt__(self, n1):
         '''
         Comprueba si el dato del Nodo actual es menor al del
         Nodo a comparar.
@@ -309,7 +309,7 @@ class ListaDobleEnlazada:
         else:
             return False
     
-    def __eq__(self, n1: Nodo()):
+    def __eq__(self, n1):
         '''
         Comprueba si el dato del Nodo actual es igual al del
         Nodo a comparar.
