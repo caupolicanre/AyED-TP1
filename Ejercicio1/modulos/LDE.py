@@ -49,6 +49,7 @@ class Nodo:
 
     def __repr__(self):
         return str(self.dato)
+        
     
     
     
@@ -285,6 +286,50 @@ class ListaDobleEnlazada:
 
         '''
         return self.concatenar(lista)
+    
+    def __lt__(self, n1: Nodo()):
+        '''
+        Comprueba si el dato del Nodo actual es menor al del
+        Nodo a comparar.
+
+        Parameters
+        ----------
+        n1 : Nodo()
+            Nodo a comparar con el actual.
+
+        Returns
+        -------
+        bool
+            Retorna True si el dato del Nodo actual es menor al
+            dato del Nodo a comparar y viceversa.
+
+        '''
+        if self.dato < n1.dato:
+            return True
+        else:
+            return False
+    
+    def __eq__(self, n1: Nodo()):
+        '''
+        Comprueba si el dato del Nodo actual es igual al del
+        Nodo a comparar.
+
+        Parameters
+        ----------
+        n1 : Nodo()
+            Nodo a comparar con el actual.
+
+        Returns
+        -------
+        bool
+            Retorna True si el dato del Nodo actual es igual al
+            dato del Nodo a comparar y viceversa.
+
+        '''
+        if self.dato == n1.dato:
+            return True
+        else:
+            return False
 
     def __getitem__(self, indice):
         '''
@@ -296,33 +341,13 @@ class ListaDobleEnlazada:
         indice : int
             Índice al cuál se va a acceder.
 
-        Raises
-        ------
-        IndexError
-            Si el índice se encuentra fuera del rango de la lista,
-            retorna un error de índice.
-
         Returns
         -------
         any type
-            Retorna el Nodo que se encuentra en el índice recibido.
+            Retorna el dato del Nodo que se encuentra en el índice recibido.
 
         '''
-        
-        if indice >= 0 and indice < self.tamanio:
-            '''El índice está dentro del rango de la lista'''
-            
-            nodoActual = self.cabeza
-            
-            # Bucle para recorrer los Nodos de la Lista
-            for _ in range(indice):
-                nodoActual = nodoActual.siguiente
-                
-            return nodoActual
-        
-        else:
-            '''El índice está fuera del rango de la lista'''
-            raise IndexError("Índice no válido. Valor fuera de rango.")        
+        return self.dato[indice]
 
     
     # Métodos
