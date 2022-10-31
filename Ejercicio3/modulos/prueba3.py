@@ -30,10 +30,10 @@ def Mezclador_listas(f1,f2):
 
 
 
-f=leer_Archivo("datos.txt")
-print(f)
-f1,f2=dividir_datos(f)
-print(f1,f2)
-f=Mezclador_listas(f1, f2)
-print(f)
+# f=leer_Archivo("datos.txt")
+# print(f)
+# f1,f2=dividir_datos(f)
+# print(f1,f2)
+# f=Mezclador_listas(f1, f2)
+# print(f)
 
