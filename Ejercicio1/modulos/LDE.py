@@ -49,7 +49,6 @@ class Nodo:
 
     def __repr__(self):
         return str(self.dato)
-        
     
     
     
@@ -286,50 +285,6 @@ class ListaDobleEnlazada:
 
         '''
         return self.concatenar(lista)
-    
-    def __lt__(self, n1):
-        '''
-        Comprueba si el dato del Nodo actual es menor al del
-        Nodo a comparar.
-
-        Parameters
-        ----------
-        n1 : Nodo()
-            Nodo a comparar con el actual.
-
-        Returns
-        -------
-        bool
-            Retorna True si el dato del Nodo actual es menor al
-            dato del Nodo a comparar y viceversa.
-
-        '''
-        if self.dato < n1.dato:
-            return True
-        else:
-            return False
-    
-    def __eq__(self, n1):
-        '''
-        Comprueba si el dato del Nodo actual es igual al del
-        Nodo a comparar.
-
-        Parameters
-        ----------
-        n1 : Nodo()
-            Nodo a comparar con el actual.
-
-        Returns
-        -------
-        bool
-            Retorna True si el dato del Nodo actual es igual al
-            dato del Nodo a comparar y viceversa.
-
-        '''
-        if self.dato == n1.dato:
-            return True
-        else:
-            return False
 
     def __getitem__(self, indice):
         '''
@@ -341,13 +296,33 @@ class ListaDobleEnlazada:
         indice : int
             Índice al cuál se va a acceder.
 
+        Raises
+        ------
+        IndexError
+            Si el índice se encuentra fuera del rango de la lista,
+            retorna un error de índice.
+
         Returns
         -------
         any type
-            Retorna el dato del Nodo que se encuentra en el índice recibido.
+            Retorna el Nodo que se encuentra en el índice recibido.
 
         '''
-        return self.dato[indice]
+        
+        if indice >= 0 and indice < self.tamanio:
+            '''El índice está dentro del rango de la lista'''
+            
+            nodoActual = self.cabeza
+            
+            # Bucle para recorrer los Nodos de la Lista
+            for _ in range(indice):
+                nodoActual = nodoActual.siguiente
+                
+            return nodoActual
+        
+        else:
+            '''El índice está fuera del rango de la lista'''
+            raise IndexError("Índice no válido. Valor fuera de rango.")        
 
     
     # Métodos
@@ -534,7 +509,7 @@ class ListaDobleEnlazada:
             Se extrae el último elemento de la Lista.
             '''
             temp = self.cola                    # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
-            self.cola.anterior.siguiente = None # Elimino la referencia del Nodo a extraer
+            # self.cola.anterior.siguiente = None # Elimino la referencia del Nodo a extraer
             self.cola = temp.anterior           # Actualizo la cola con el Nodo anterior
             
             self._tamanio-=1
@@ -619,10 +594,6 @@ class ListaDobleEnlazada:
         return self
     
     
-    '''
-    ODENAR VIEJO (Burbuja) - Se presenta este
-    Funciona, pero la correción decía que es por burbujeo, no por inserción
-    '''
     def ordenar(self):
         '''
         Ordena los elementos de la lista de "menor a mayor".
@@ -668,64 +639,6 @@ class ListaDobleEnlazada:
                        
                 
             terminar = temp     # Actualizo la variable para terminar de ordenar
-            
-    
-    '''
-    ORDENAR NUEVO (INSERCIÓN) - FUNCIONA (No tiene que intercambiar lps datos)
-    Funciona por Inserción, pero está intercambiando los datos, tiene que intercambiar
-    las referencias de los Nodos.
-    '''
-    # def ordenar(self):
-    #     ''
-        
-    #     # Bucle para recorrer toda la lista
-    #     for indice in range (1, self.tamanio):
-            
-    #         datoActual = self[indice].dato
-            
-    #         posicion = indice-1
-            
-    #         # Bucle para encontrar la posición del Nodo
-    #         while posicion >= 0 and self[posicion].dato > datoActual:
-    #             self[posicion+1].dato = self[posicion].dato
-    #             posicion = posicion - 1
-            
-    #         self[posicion+1].dato = datoActual
-    
-    
-    '''
-    ORDENAR NUEVO 2 (INSERCIÓN) - NO FUNCIONA
-    Inteno modificar el ordenar anterior,
-    pero que intercambie referencias, no los datos
-    '''
-    # def ordenar(self):
-    #     ''
-        
-    #     # Bucle para recorrer toda la lista
-    #     for indice in range (1, self.tamanio):
-            
-    #         nodoActual = self[indice]
-            
-    #         temp = indice-1     # Índice del Nodo que se encuentra antes de nodoActual
-            
-    #         # Bucle para encontrar la posición del Nodo
-    #         while temp >= 0 and self[temp].dato > nodoActual.dato:
-    #             # self[temp+1].dato = self[temp].dato
-                
-    #             tempAnterior = nodoActual.anterior
-    #             tempSiguiente = nodoActual.siguiente
-                
-    #             nodoActual.anterior = self[temp].anterior
-    #             nodoActual.siguiente = self[temp].siguiente
-                
-    #             temp -= 1
-                
-    #         self[temp].anterior = tempAnterior
-    #         self[temp].siguiente = tempSiguiente
-    
-            
-    #         '''Print para comprobar la lista'''
-    #         print(self)
     
     
     def concatenar(self, lista):
