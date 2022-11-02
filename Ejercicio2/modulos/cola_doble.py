@@ -51,7 +51,7 @@ class ColaDoble():
         return self.items.esta_vacia()
     
     
-    def agregarFrente(self, item):
+    def agregar_frente(self, item):
         '''
         Agrega un nuevo ítem al frente de la Cola Doble.
         
@@ -68,7 +68,7 @@ class ColaDoble():
         return self.items.anexar(item)
     
     
-    def agregarFinal(self, item):
+    def agregar_final(self, item):
         '''
         Agrega un nuevo ítem al final de la Cola Doble.
        
@@ -85,7 +85,7 @@ class ColaDoble():
         return self.items.agregar(item)
     
     
-    def removerFrente(self):
+    def remover_frente(self):
         ''' 
         Elimina el ítem del frente de la Cola Doble 
         y lo devuelve.
@@ -99,7 +99,7 @@ class ColaDoble():
         return self.items.extraer(self.items.tamanio-1)
     
     
-    def removerFinal(self):
+    def remover_final(self):
        ''' 
        Elimina el ítem del final de la Cola Doble 
        y lo devuelve.
@@ -119,15 +119,15 @@ if __name__=='__main__':
     
     pruebaColaDoble= ColaDoble()
     
-    pruebaColaDoble.agregarFinal(25)
-    pruebaColaDoble.agregarFinal(6)
-    pruebaColaDoble.agregarFrente(8)
+    pruebaColaDoble.agregar_final(25)
+    pruebaColaDoble.agregar_final(6)
+    pruebaColaDoble.agregar_frente(8)
     
     print(pruebaColaDoble)
-    print(pruebaColaDoble.removerFinal())
+    print(pruebaColaDoble.remover_final())
     
     print(pruebaColaDoble)
-    print(pruebaColaDoble.removerFrente())
+    print(pruebaColaDoble.remover_frente())
     
     print(pruebaColaDoble)
     

@@ -4,8 +4,9 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['Ejercicio2\\modulos\\cola_doble.py', 'Ejercicio2\\modulos\\mazo.py', 'Ejercicio2\\modulos\\juego_guerra.py', 'Ejercicio2\\juego_guerra.py']
+recent_files = ['Ejercicio2\\modulos\\juego_guerra.py', 'Ejercicio2\\modulos\\mazo.py', 'Ejercicio2\\modulos\\carta.py', 'Ejercicio2\\juego_guerra.py']
 
 [main]
 version = 0.2.0
+recent_files = []
 

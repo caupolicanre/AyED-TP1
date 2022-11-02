@@ -1,3 +1,7 @@
+
+from __future__ import annotations
+
+
 '''Clase del Nodo'''
 
 class Nodo:
@@ -50,6 +54,26 @@ class Nodo:
     def __repr__(self):
         return str(self.dato)
     
+    # def __lt__(self, other: Nodo()):
+    #     if self._dato < other._dato:
+    #         True
+    #     else:
+    #         False
+    
+    # def __gt__(self, other: Nodo()):
+    #     if self._dato > other._dato:
+    #         True
+    #     else:
+    #         False
+
+    # def __eq__(self, other: Nodo()):
+    #     if self._dato == other._dato:
+    #         True
+    #     else:
+    #         False
+    
+    def __getitem__(self, indice):
+        return self.dato[indice]
     
     
     # Atributos
@@ -285,45 +309,6 @@ class ListaDobleEnlazada:
 
         '''
         return self.concatenar(lista)
-
-    def __getitem__(self, indice):
-        '''
-        Método para acceder a un Nodo de la Lista por medio
-        de un índice.
-
-        Parameters
-        ----------
-        indice : int
-            Índice al cuál se va a acceder.
-
-        Raises
-        ------
-        IndexError
-            Si el índice se encuentra fuera del rango de la lista,
-            retorna un error de índice.
-
-        Returns
-        -------
-        any type
-            Retorna el Nodo que se encuentra en el índice recibido.
-
-        '''
-        
-        if indice >= 0 and indice < self.tamanio:
-            '''El índice está dentro del rango de la lista'''
-            
-            nodoActual = self.cabeza
-            
-            # Bucle para recorrer los Nodos de la Lista
-            for _ in range(indice):
-                nodoActual = nodoActual.siguiente
-                
-            return nodoActual
-        
-        else:
-            '''El índice está fuera del rango de la lista'''
-            raise IndexError("Índice no válido. Valor fuera de rango.")        
-
     
     # Métodos
 
@@ -508,9 +493,10 @@ class ListaDobleEnlazada:
             El usuario no ingresa posición o ingresa la última posición.
             Se extrae el último elemento de la Lista.
             '''
-            temp = self.cola                    # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
-            # self.cola.anterior.siguiente = None # Elimino la referencia del Nodo a extraer
-            self.cola = temp.anterior           # Actualizo la cola con el Nodo anterior
+            temp = self.cola            # Guardo en una variable auxiliar el Nodo extraido, para poder retornarlo
+            aux = self.cola.anterior
+            self.cola.anterior = None   # Elimino la referencia del Nodo a extraer
+            self.cola = aux             # Actualizo la cola con el Nodo anterior
             
             self._tamanio-=1
             return temp
