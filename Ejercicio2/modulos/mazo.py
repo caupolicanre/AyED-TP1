@@ -7,34 +7,29 @@ import random as rd
 
 class Carta:
     
-    def __init__(self, palo, numero, jerarquia=0):
+    def __init__(self, palo, numero, jerarquia, cara = "Boca abajo"):
         self._palo = palo
         self._numero = numero
         self._jerarquia = jerarquia 
+        self._cara = cara
         
         
     # Métodos mágicos
     
     def __str__(self):
-        return str(self._numero) + str(self._palo)
+        if self._cara == "Boca abajo":
+            return "-X"
+        else:
+            return str(self._numero) + str(self._palo)
     
-    # def __lt__(self, other):
-    #     if self._jerarquia < other._jerarquia:
-    #         True
-    #     else:
-    #         False
+    def __lt__(self, other):
+        return self._jerarquia < other._jerarquia
     
-    # def __gt__(self, other):
-    #     if self._jerarquia > other._jerarquia:
-    #         True
-    #     else:
-    #         False
+    def __gt__(self, other):
+        return self._jerarquia > other._jerarquia
 
-    # def __eq__(self, other):
-    #     if self._jerarquia == other._jerarquia:
-    #         True
-    #     else:
-    #         False
+    def __eq__(self, other):
+        return self._jerarquia == other._jerarquia
     
     def __getitem__(self, indice):
         return self._numero[indice]
@@ -53,6 +48,14 @@ class Carta:
     @property
     def jerarquia(self):
         return self._jerarquia
+    
+    @property
+    def cara(self):
+        return self._cara
+    
+    @cara.setter
+    def cara(self, nueva_cara):
+        self._cara = nueva_cara
 
 
 class Mazo:
@@ -99,7 +102,7 @@ class Mazo:
         '''
         self.mazo.agregar_frente(carta_nueva)
         
-    def jugar_carta(self):
+    def jugar_carta(self, estado_cara = "Boca abajo"):
         '''
         Remueve la carta que se encuentra en el frente del mazo,
         y la devuelve. Dependiendo del estado, estará Boca arriba,
@@ -110,7 +113,7 @@ class Mazo:
         estado_cara : class, opcional
             Si los jugadores están en guerra, se juega la carta
             "Boca abajo", sino, se recibe como parámetro "Boca arriba".
-            Por defecto la cara de la carta es "Boca arriba".
+            Por defecto la cara de la carta es "Boca abajo".
 
         Returns
         -------
@@ -119,7 +122,7 @@ class Mazo:
 
         '''
         carta_jugada = self.mazo.remover_frente()
-        # carta_jugada._cara = estado_cara
+        carta_jugada._cara = estado_cara
         
         return carta_jugada
     
@@ -137,7 +140,7 @@ class Mazo:
         None.
 
         '''
-        self.mazo.agregar_final(carta_ganada)
+        self.mazo.agregar_final(carta_ganada._dato)
 
     def sacar_carta(self):
         '''

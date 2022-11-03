@@ -16,54 +16,12 @@ class JuegoGuerra:
         
         self._semilla = random_seed
         
+        self.turnos_jugados = 1
         self.cantidad_turnos = 10000    # Límite de turnos
-        self.turnos = 0                 # Turnos jugados
-        self.juego_empatado = False
         
-        self.jugador_ganador = None
+        self.ganador = None
+        self.empate = True
         
-        
-    
-    # Propiedades
-
-    @property
-    def turnos_jugados(self) -> int:
-        '''
-        
-
-        Returns
-        -------
-        int
-            Cantidad de turnos jugados.
-
-        '''
-        return self.turnos
-    
-    @property
-    def empate(self) -> bool:
-        '''
-        Getter de empate.
-
-        Returns
-        -------
-        bool
-            Retorna True si los jugadores empataron, y viceversa.
-
-        '''
-        return self.juego_empatado
-    
-    @property
-    def ganador(self) -> str:
-        '''
-        Getter de ganador.
-
-        Returns
-        -------
-        str
-            String con el Jugador ganador de la partida.
-
-        '''
-        return self.jugador_ganador
     
     
     # Métodos
@@ -81,15 +39,14 @@ class JuegoGuerra:
 
         '''
 
-        cartas = []     # Lista para guardar las cartas, mezclarlas y luego crear un mazo
-        jerarquia = 0   # Utilizo una jerarquía para comparar luego las cartas
+        cartas = []     # Lista para guardar las cartas, mezclarlas y luego crear
+        jerarquia = 0
         
         '''Asigno cada número a los 4 palos inicializando las cartas'''
         for numero in self.valores:
-            jerarquia+=1    # Aumento la jerarquía por cada iteración
-            
+            jerarquia += 1
             for palo in self.palos:
-                carta = Carta(palo, numero, jerarquia)  # Creo una carta y le paso los parámetros correspondientes
+                carta = Carta(palo, numero, jerarquia, "Boca arriba")    # Inicializo una clase Carta con los datos generados
                 cartas.append(carta)    # Agrego la carta a la lista de cartas para crear luego el mazo
         
         '''Mezclo las cartas'''
@@ -126,6 +83,16 @@ class JuegoGuerra:
                 
     
     def iniciar_juego(self):
+        '''
+        Función donde se procesa cada parte del Juego Guerra.
+        Requerida para el test, ya que es la única función a la
+        que llama.
+
+        Returns
+        -------
+        None.
+
+        '''
         
         '''Se crea el mazo y se mezclan las cartas'''
         self.crear_mazo()
@@ -133,302 +100,162 @@ class JuegoGuerra:
         '''Se reparten las cartas a cada jugador'''
         self.repartir()
         
-        '''Inicializo los turnos jugados'''
-        self.turnos = 0
+        '''Comienza la simulación del juego'''
+        self.jugar()
         
-        while self.turnos < self.cantidad_turnos:
+                    
+
+    def mostrar_mazo(self, cartas_restantes: int):
+        '''
+        Muestra por consola las cartas restantes del mazo de un jugador.
+        Con el formato de 10 cartas como máximo por ilera.
+
+        Parameters
+        ----------
+        cartas_restantes : int
+            Cartas restantes en el mazo del jugador.
+
+        Returns
+        -------
+        None.
+
+        '''
+        cartas = True
+        cartas_restantes = cartas_restantes
+        
+        while cartas:
+            if cartas_restantes >= 10:
+                print("-X " * 10)
+                cartas_restantes -= 10
+            else:
+                print("-X " * cartas_restantes)
+                cartas_restantes -= cartas_restantes
+                cartas = False
+
+
+    def jugar(self):
+        '''
+        Compara las cartas en cada turno, llama al método
+        "mostrar_mazo" para mostrar por pantalla los mazos de los
+        jugadores.
+
+        Returns
+        -------
+        None.
+
+        '''
+        while self.turnos_jugados <= self.cantidad_turnos:
+            
             try:
-                self.turnos += 1
-                self.jugar(turno_actual = self.turnos, carta_jugador1 = self.mazo_jugador1.jugar_carta(), carta_jugador2 = self.mazo_jugador2.jugar_carta())
-            
-            except(ValueError):
-                '''
-                Si alguno de los 2 mazo ya no tiene cartas, 
-                devuelve "ValueError, por ende, termina el juego
-                '''
-                pass
-            
-            if self.mazo_jugador1.tamanio() == 0:
-                '''
-                El Jugador 1 se queda sin cartas.
-                Gana el Jugador 2 la partida.
-                '''
-                self.jugador_ganador = "jugador 2"
-                print("\n\t\t\t\t|  Gana Jugador 2  |")
-                break
-            
-            elif self.mazo_jugador2.tamanio() == 0:
-                '''
-                El Jugador 2 se queda sin cartas.
-                Gana el Jugador 1 la partida.
-                '''
-                self.jugador_ganador = "jugador 1"
-                print("\n\t\t\t\t|  Gana Jugador 1  |")
-                break
-            
-            elif self.turnos == self.cantidad_turnos:
-                '''
-                Se llega a la cantidad límite de turnos.
-                Se declara empate.
-                '''
-                self.juego_empatado = True
-                print("\n\t\t\t\t\t|  Empate  |")
-                break
-
-
-    def jugar(self, turno_actual, carta_jugador1, carta_jugador2):
-        
-        '''Se colocan las cartas jugadas en la mesa'''
-        self.cartas_mesa.append(carta_jugador1)
-        self.cartas_mesa.append(carta_jugador2)
-        
-
-        if self.valores.index(carta_jugador1[0]) < self.valores.index(carta_jugador2[0]):
-            '''Gana el turno el Jugador 2'''
-            
-            '''Muestro los mazos de ambos jugadores, y las cartas jugadas'''
-            print('-------------------------------------------------------\n')
-            
-            print(f"Turno: {turno_actual}\n")
-            
-            print("Jugador 1:")
-            # Muestro las cartas del mazo del jugador 1
-            cartas = True
-            cartas_restantes = self.mazo_jugador1.tamanio()
-            while cartas:
-                if cartas_restantes >= 10:
-                    print("-X " * 10)
-                    cartas_restantes -= 10
-                else:
-                    print("-X " * cartas_restantes)
-                    cartas_restantes -= cartas_restantes
-                    cartas = False
-                    
-            
-            '''Muestro las cartas jugadas'''
-            print(f"\n\t\t{carta_jugador1} {carta_jugador2}\n")
-            
-            print("Jugador 2: ")
-            # Muestro las cartas del mazo del jugador 1
-            cartas = True
-            cartas_restantes = self.mazo_jugador2.tamanio()
-            while cartas:
-                if cartas_restantes >= 10:
-                    print("-X " * 10)
-                    cartas_restantes -= 10
-                else:
-                    print("-X " * cartas_restantes)
-                    cartas_restantes -= cartas_restantes
-                    cartas = False
-            
-            print('\n-------------------------------------------------------')
-        
-            '''Agrego las cartas que ganó el Jugador 2 a su mazo'''
-            for carta in self.cartas_mesa:
-                self.mazo_jugador2.ganar_carta(carta)
-            
-            '''Remuevo las cartas de la mesa'''
-            self.cartas_mesa.clear()
-        
-        
-        elif self.valores.index(carta_jugador1[0]) > self.valores.index(carta_jugador2[0]):
-            '''Gana el turno el Jugador 1'''
-            
-            '''Muestro los mazos de ambos jugadores, y las cartas jugadas'''
-            print('-------------------------------------------------------\n')
-            
-            print(f"Turno: {turno_actual}\n")
-            print("Jugador 1:")
-            # Muestro las cartas del mazo del jugador 1
-            cartas = True
-            cartas_restantes = self.mazo_jugador1.tamanio()
-            while cartas:
-                if cartas_restantes >= 10:
-                    print("-X " * 10)
-                    cartas_restantes -= 10
-                else:
-                    print("-X " * cartas_restantes)
-                    cartas_restantes -= cartas_restantes
-                    cartas = False
-            
-            '''Muestro las cartas jugadas'''
-            print(f"\n\t\t{carta_jugador1} {carta_jugador2}\n")
-            
-            print("Jugador 2: ")
-            # Muestro las cartas del mazo del jugador 1
-            cartas = True
-            cartas_restantes = self.mazo_jugador2.tamanio()
-            while cartas:
-                if cartas_restantes >= 10:
-                    print("-X " * 10)
-                    cartas_restantes -= 10
-                else:
-                    print("-X " * cartas_restantes)
-                    cartas_restantes -= cartas_restantes
-                    cartas = False
-            
-            print('\n-------------------------------------------------------')
-        
-            '''Agrego las cartas que ganó el Jugador 1 a su mazo'''
-            for carta in self.cartas_mesa:
-                self.mazo_jugador1.ganar_carta(carta)
-            
-            '''Remuevo las cartas de la mesa'''
-            self.cartas_mesa.clear()
-        
-        
-        elif self.valores.index(carta_jugador1[0]) == self.valores.index(carta_jugador2[0]):
-            '''Entran en Guerra los jugadores'''
-            
-            carta_jugador1G = 0
-            carta_jugador2G = 0
-            
-            '''Bucle donde se ejecuta la Guerra hasta que las cartas jugadas no sean iguales'''
-            while carta_jugador1G == carta_jugador2G:
-            
-                if self.mazo_jugador1.tamanio()>=4 and self.mazo_jugador2.tamanio()>=4:
-                    '''Ambos jugadores cuentan con cartas suficientes para la Guerra'''
-                    
-                    '''Muestro los mazos de ambos jugadores, y las cartas jugadas'''
-                    print('-------------------------------------------------------')
-                    print("\t\t\t\t\t\t|  GUERRA  |")
-                    
-                    print(f"Turno: {turno_actual}\n")
-                    print("Jugador 1:")
-                    # Muestro las cartas del mazo del jugador 1
-                    cartas = True
-                    cartas_restantes = self.mazo_jugador1.tamanio()-4   # Resto 4 cartas a las cartas restantes para mostrar en la mesa, ya que son parte del botín de la guerra
-                    while cartas:
-                        if cartas_restantes >= 10:
-                            print("-X " * 10)
-                            cartas_restantes -= 10
-                        else:
-                            print("-X " * cartas_restantes)
-                            cartas_restantes -= cartas_restantes
-                            cartas = False
-                    
-                    '''Botín de la guerra, cartas boca abajo en la mesa'''
-                    for i in range(3):
-                        self.cartas_mesa.append(self.mazo_jugador1.jugar_carta())
-                        self.cartas_mesa.append(self.mazo_jugador2.jugar_carta())
-                    
-                    self.cartas_mesa.append(carta_jugador1G:=self.mazo_jugador1.jugar_carta())
-                    self.cartas_mesa.append(carta_jugador2G:=self.mazo_jugador2.jugar_carta())
-                    
-                    print(f"\n\t\t{carta_jugador1} {carta_jugador2}", "-X " * 6, f"{carta_jugador1G} {carta_jugador2G}\n")
-                    
-                    print("Jugador 2: ")
-                    # Muestro las cartas del mazo del jugador 1
-                    cartas = True
-                    cartas_restantes = self.mazo_jugador2.tamanio()-4   # Resto 4 cartas a las cartas restantes para mostrar en la mesa, ya que son parte del botín de la guerra
-                    while cartas:
-                        if cartas_restantes >= 10:
-                            print("-X " * 10)
-                            cartas_restantes -= 10
-                        else:
-                            print("-X " * cartas_restantes)
-                            cartas_restantes -= cartas_restantes
-                            cartas = False
-                            
-                    print('\n-------------------------------------------------------')
-                    
-                    '''Comparo las nuevas cartas jugadas'''
-                    if self.valores.index(carta_jugador1G[0]) > self.valores.index(carta_jugador2G[0]):
-                        '''
-                        Gana la guerra el Jugador 1.
-                        Agrego las cartas que ganó el Jugador 1 a su mazo.
-                        '''
-                        for carta in self.cartas_mesa:
-                            self.mazo_jugador1.ganar_carta(carta)
-                            
-                        '''Remuevo las cartas de la mesa'''
-                        self.cartas_mesa.clear()
-        
-                    elif self.valores.index(carta_jugador1G[0]) < self.valores.index(carta_jugador2G[0]):
-                        '''
-                        Gana la guerra el Jugador 2.
-                        Agrego las cartas que ganó el Jugador 2 a su mazo.
-                        '''
-                        for carta in self.cartas_mesa:
-                            self.mazo_jugador2.ganar_carta(carta)
-                            
-                        '''Remuevo las cartas de la mesa'''
-                        self.cartas_mesa.clear()
-                    
-                    # Actualizo las cartas actuales jugadas
-                    carta_jugador1 = carta_jugador1G
-                    carta_jugador2 = carta_jugador2G
+                carta_jugador1 = self.mazo_jugador1.jugar_carta("Boca arriba")
+                carta_jugador2 = self.mazo_jugador2.jugar_carta("Boca arriba")
+                
+                self.cartas_mesa.append(carta_jugador1)
+                self.cartas_mesa.append(carta_jugador2)
+                
+                print('-------------------------------------------------------')
+                print(f"\nTurno: {self.turnos_jugados}\n")  
+                print("Jugador 1:")
+                self.mostrar_mazo(self.mazo_jugador1.tamanio())     # Muestro las cartas del mazo del jugador 1
+                
+                # Muestro las cartas jugadas
+                print(f"\n\t\t{carta_jugador1} {carta_jugador2}\n")
+                
+                print("Jugador 2: ")
+                self.mostrar_mazo(self.mazo_jugador2.tamanio())     # Muestro las cartas del mazo del jugador 2
                 
                 
-                elif self.mazo_jugador1.tamanio()<4 or self.mazo_jugador2.tamanio()<4:
-                    '''Alguno de los 2 jugadores no cuenta con las cartas suficientes para la Guerra'''
+                if carta_jugador1 > carta_jugador2:
+                    '''Gana ronda Jugador 1'''
+                    for carta in self.cartas_mesa:
+                        self.mazo_jugador1.ganar_carta(carta)
+                
+                
+                elif carta_jugador1 < carta_jugador2:
+                    '''Gana ronda Jugador 2'''
+                    for carta in self.cartas_mesa:
+                        self.mazo_jugador2.ganar_carta(carta)
+                
+                
+                elif carta_jugador1 == carta_jugador2:
+                    '''Las cartas son iguales. Entran en Guerra'''
                     
-                    if self.mazo_jugador1.tamanio()<4:
-                        '''Jugador 1 Pierde'''
-                        perdedor = "Jugador 1"
-                    else:
-                        '''Jugador 2 Pierde'''
-                        perdedor = "Jugador 2"
-                    
-                    '''Muestro los mazos de ambos jugadores, y las cartas jugadas'''
-                    print('-------------------------------------------------------')
-                    print("\t\t\t\t\t\t|  GUERRA  |")
-                    
-                    print(f"Turno: {turno_actual}\n")
-                    print("Jugador 1:")
-                    # Muestro las cartas del mazo del jugador 1
-                    cartas = True
-                    cartas_restantes = self.mazo_jugador1.tamanio()
-                    while cartas:
-                        if cartas_restantes >= 10:
-                            print("-X " * 10)
-                            cartas_restantes -= 10
-                        else:
-                            print("-X " * cartas_restantes)
-                            cartas_restantes -= cartas_restantes
-                            cartas = False
-                            
-                    '''Muestro las cartas jugadas'''
-                    print(f"El {perdedor} no tiene las cartas suficientes para finalizar el turno\n")
-                    print(f"\t\t{carta_jugador1} {carta_jugador2}\n")
-                    
-                    print("Jugador 2: ")
-                    # Muestro las cartas del mazo del jugador 1
-                    cartas = True
-                    cartas_restantes = self.mazo_jugador2.tamanio()
-                    while cartas:
-                        if cartas_restantes >= 10:
-                            print("-X " * 10)
-                            cartas_restantes -= 10
-                        else:
-                            print("-X " * cartas_restantes)
-                            cartas_restantes -= cartas_restantes
-                            cartas = False
-                    
-                    print('\n-------------------------------------------------------')
-                    
-                    '''Agrego las cartas al Mazo del jugador ganador'''
-                    
-                    if perdedor == 'Jugador 1':
-                        '''Gana Jugador 2. Agrego las cartas que ganó, a su mazo'''
-                        for carta in self.cartas_mesa:
-                            self.mazo_jugador2.ganar_carta(carta)
+                    while carta_jugador1 == carta_jugador2:
+                        '''Mientras los jugadores sigan en Guerra, se ejecuta esta parte de la simulación'''
                         
-                        '''Remuevo las cartas de la mesa'''
-                        self.cartas_mesa.clear()
+                        # Variables auxiliares para mostrar en la mesa
+                        carta_jugador1_guerra = carta_jugador1
+                        carta_jugador2_guerra = carta_jugador2
                         
-                    elif perdedor == 'Jugador 2':
-                        '''Gana Jugador 1. Agrego las cartas que ganó, a su mazo'''
+                        for _ in range(3):
+                            self.cartas_mesa.append(self.mazo_jugador1.jugar_carta())
+                            self.cartas_mesa.append(self.mazo_jugador2.jugar_carta())
+                        
+                        carta_jugador1 = self.mazo_jugador1.jugar_carta("Boca arriba")
+                        carta_jugador2 = self.mazo_jugador2.jugar_carta("Boca arriba")
+                        self.cartas_mesa.append(carta_jugador1)
+                        self.cartas_mesa.append(carta_jugador2)
+                        
+                        print('-------------------------------------------------------')
+                        print("\t\t\t\t\t\t|  GUERRA  |")
+                        print(f"Turno: {self.turnos_jugados}\n")  
+                        print("Jugador 1:")
+                        self.mostrar_mazo(self.mazo_jugador1.tamanio())
+                        
+                        # Muestro las cartas jugadas
+                        print(f"\n\t\t{carta_jugador1_guerra} {carta_jugador2_guerra}", "-X " * 6, f"{carta_jugador1} {carta_jugador2}\n")
+                        
+                        print("Jugador 2: ")
+                        self.mostrar_mazo(self.mazo_jugador2.tamanio())
+
+
+                    if carta_jugador1 > carta_jugador2:
+                        '''Gana ronda Jugador 1'''
                         for carta in self.cartas_mesa:
                             self.mazo_jugador1.ganar_carta(carta)
-                        
-                        '''Remuevo las cartas de la mesa'''
-                        self.cartas_mesa.clear()
                     
-                    #Cambio los valores de las variables temporales, para salir del while
-                    carta_jugador1G = -1
-                    carta_jugador2G = -2
-                    
+                    elif carta_jugador1 < carta_jugador2:
+                        '''Gana ronda Jugador 2'''
+                        for carta in self.cartas_mesa:
+                            self.mazo_jugador2.ganar_carta(carta)
+            
+            
+            except:
+                
+                if self.mazo_jugador1.tamanio() == 0:
+                    '''
+                    El Jugador 1 se queda sin cartas.
+                    Gana el Jugador 2 la partida.
+                    '''
+                    self.ganador = "jugador 2"
+                    print('-------------------------------------------------------')
+                    print("\n\t\t\t\t|  Gana Jugador 2  |")
+                
+                if self.mazo_jugador2.tamanio() == 0:
+                    '''
+                    El Jugador 2 se queda sin cartas.
+                    Gana el Jugador 1 la partida.
+                    '''
+                    self.ganador = "jugador 1"
+                    print('-------------------------------------------------------')
+                    print("\n\t\t\t\t|  Gana Jugador 1  |")
+                
+                break
+            
+            
+            finally:
+                '''
+                Esta parte se ejecuta siempre.
+                Sumo 1 al contador de turnos, y remuevo las cartas de la mesa.
+                '''
+                
+                self.turnos_jugados += 1
+                self.cartas_mesa.clear()
+        
+        if self.turnos_jugados >= self.cantidad_turnos:
+            self.empate = True
+            print('-------------------------------------------------------')
+            print("\n\t\t\t\t\t\t|  Empate  |")
 
 # Pruebas locales
 

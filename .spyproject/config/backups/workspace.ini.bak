@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['Ejercicio2\\modulos\\juego_guerra.py', 'Ejercicio2\\modulos\\mazo.py', 'Ejercicio2\\modulos\\carta.py', 'Ejercicio2\\juego_guerra.py']
+recent_files = ['Ejercicio2\\modulos\\juego_guerra.py', 'Ejercicio2\\pruebas\\test_juego_guerra.py', 'Ejercicio2\\modulos\\mazo.py', 'Ejercicio1\\modulos\\LDE.py', '..\\TP1 Cosas Extra\\Ejercicio 2\\Código Juan Gonzalez\\FINAL_juego_guerra.py']
 
 [main]
 version = 0.2.0
