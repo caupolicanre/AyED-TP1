@@ -1,66 +1,92 @@
-def Mezclador_datos(f1,f2,F):
-    with open(f1,"r") as f1, open(f2,"r") as f2, open(F,"w") as f:
-        d1=f1.readline()
-        d2=f2.readline()
-        numSublistas=0
-        Fin_proceso=True
-        sublista1= True
-        sublista2=True
+def mezclar_datos(f1,f2,F):
+    with open(f1,"r") as f1, open(f2,"r") as f2, open(F, "w")as f:
+        d1 = f1.readline()        # es el primer dato de f1
+        d2 = f2.readline()        # es el primer dato de f2
+        aux = d1             # es el dato que queremos escribir en la lista de salida 
+        ordenada = True
+        sublistaf1 = True
+        sublistaf2 = True
         if d2 == '':
             while d1:
-                daux = d1
+                aux = d1
                 d1 = f1.readline() 
-                f.write(daux) 
-            return Fin_proceso
-        else:
-            while d1 and d2:
-                while sublista1==True and sublista2==True:
-                    if d1<d2:
-                        daux=d1
-                        d1=f1.readline()
-                        f.write(daux)
-                        if daux>d1:
-                            sublista1=False
-                    else:
-                        daux=d2
-                        d2=f2.readline()
-                        f.write(daux)
-                        if daux>d2:
-                            sublista2=False
-                if sublista1==False:
-                    daux=d2
-                    f.write(daux)
-                    d2=f2.readline()
-                    while daux<d2:
-                        daux = d2
+                f.write(aux) 
+            return ordenada
+        else:    
+            while d1 and d2:    
+                '''
+                 Mientras existan datos en d1 y d2
+                '''
+                if d2 < d1:
+                    '''
+                    Si el dato(d2) en el archivo 2 es menor al dato(d1) en el archivo 1
+                    que se va a guardar el valor de d2 en una variable aux y se toma el siguiente valor
+                    si este valor es menor al anterior termina la sublista.
+                    '''
+                    aux = d2
+                    d2 = f2.readline()
+                    if d2 < aux:
+                        
+                        sublistaf2 = False 
+                else:
+                    '''
+                    Se  guarda el valor de d1 en aux y se toma el siguiente valor
+                    si este valor es menor al anterior termina la sublista.
+                    '''
+                    aux = d1
+                    d1 = f1.readline()       
+                    if d1 < aux:
+                        
+                        sublistaf1 = False
+                        
+                if sublistaf1 == False:
+                    '''
+                    Si se termino la sub lista escribir el resto de la sublista
+                    de f2 hasta que esta tambien se termine.
+                    '''
+                    f.write(aux)
+                    while aux < d2:
+                        aux = d2
                         d2 = f2.readline()
-                        f.write(daux)
-                        sublista1=True
-                elif sublista2==False:
-                    daux=d1
-                    f.write(daux)
-                    d1=f1.readline()
-                    while daux < d1:
-                        daux = d1
+                        f.write(aux)
+                    
+                    
+                elif sublistaf2 == False:
+                    '''
+                    Si se termino la sublista en f1 escribir el resto de la sublista
+                    de el archivo2 hasta que esta tambien se termine
+                    '''
+                    f.write(aux)
+                    while aux < d1:
+                        aux = d1
                         d1 = f1.readline()
-                        f.write(daux)
-                        sublista2=True
-            numSublistas+=1
-            while d1=='' and  d2!='':  
-                daux = d2
+                        f.write(aux)
+                    
+                if sublistaf1 != False and sublistaf2 != False:
+                    '''
+                    Actualizacion de las sublistas
+                    '''
+                    f.write(aux)
+                else:
+                    sublistaf1 = True    
+                    sublistaf2 = True
+                
+            while d1 == '' and d2 != '':  
+                '''
+                Si f2 se queda sin datos pero aun hay datos en f1
+                se agregan los datos restantes hasta que 
+                no haya mas datos en ninguno de los dos archivos.
+                '''
+                aux = d2
                 d2 = f2.readline()
-                f.write(daux)
-                numSublistas+=1
-            while d1!='' and d2=='':
-                daux = d1
+                f.write(aux)
+                
+            while d2 == '' and d1 != '':
+                '''
+                Si f1 se queda sin datos pero aun hay datos en f1
+                se agregan los datos restantes hasta que 
+                no haya mas datos en ninguno de los dos archivos.
+                '''
+                aux = d1
                 d1 = f1.readline()
-                f.write(daux)
-                numSublistas+=1
-            
-if __name__=='__main__':
-    Mezclador_datos("f1.txt","f2.txt", "mezclados.txt")
-    
-            
-            
-            
-            
+                f.write(aux)
