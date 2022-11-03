@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['Ejercicio3\\modulos\\dividir.py', 'Ejercicio3\\modulos\\Mezclador.py', 'Ejercicio3\\modulos\\prueba.py', 'Ejercicio3\\modulos\\Creador archivo.py']
+recent_files = ['Ejercicio3\\modulos\\dividir.py', 'Ejercicio3\\modulos\\Mezclador.py', 'Ejercicio3\\modulos\\prueba.py', 'Ejercicio3\\modulos\\Creador archivo.py', 'Ejercicio3\\modulos\\Mezcla_Natural.py', '..\\..\\..\\..\\..\\AyED_TP2_ReBrehm_TUPED2022\\Ejercicio2\\modulos\\Temperaturas_DB.py']
 
 [main]
 version = 0.2.0
