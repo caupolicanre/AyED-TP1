@@ -1,8 +1,61 @@
+# Importo Cola Doble para la implementaciÃ³n del Mazo
 from cola_doble import ColaDoble
 
 # Importaciones para pruebas locales
-from carta import Carta
 import random as rd
+
+
+class Carta:
+    
+    def __init__(self, palo, numero, jerarquia, cara = "Boca abajo"):
+        self._palo = palo
+        self._numero = numero
+        self._jerarquia = jerarquia 
+        self._cara = cara
+        
+        
+    # Métodos mágicos
+    
+    def __str__(self):
+        if self._cara == "Boca abajo":
+            return "-X"
+        else:
+            return str(self._numero) + str(self._palo)
+    
+    def __lt__(self, other):
+        return self._jerarquia < other._jerarquia
+    
+    def __gt__(self, other):
+        return self._jerarquia > other._jerarquia
+
+    def __eq__(self, other):
+        return self._jerarquia == other._jerarquia
+    
+    def __getitem__(self, indice):
+        return self._numero[indice]
+            
+
+    # Propiedades
+    
+    @property
+    def palo(self):
+        return self._palo
+    
+    @property
+    def numero(self):
+        return self._numero
+        
+    @property
+    def jerarquia(self):
+        return self._jerarquia
+    
+    @property
+    def cara(self):
+        return self._cara
+    
+    @cara.setter
+    def cara(self, nueva_cara):
+        self._cara = nueva_cara
 
 
 class Mazo:
@@ -10,19 +63,36 @@ class Mazo:
     def __init__(self):
         self.mazo = ColaDoble()
     
+    # Métodos Mágicos
+    
     def __str__(self):
-        return self.mazo.__str__()
+        return str(self.mazo)
     
     def __iter__(self):
         return iter(self.mazo)
     
-    def agregar_carta(self, cartaNueva):
+    
+    # Métodos
+    
+    def tamanio(self):
+        '''
+        Método para conocer el tamaño del Mazo.
+
+        Returns
+        -------
+        int
+            Retorna tamaño del Mazo.
+
+        '''
+        return self.mazo.tamanio()
+    
+    def agregar_carta(self, carta_nueva):
         '''
         Recibe una carta, y la agrega al mazo.
 
         Parameters
         ----------
-        cartaNueva : class
+        carta_nueva : class
             Recibe una carta.
 
         Returns
@@ -30,40 +100,71 @@ class Mazo:
         None.
 
         '''
-        self.mazo.agregarFinal(cartaNueva)
-
-    def jugar_carta(self, estadoCara="Boca abajo"):
+        self.mazo.agregar_frente(carta_nueva)
+        
+    def jugar_carta(self, estado_cara = "Boca abajo"):
         '''
-        Remueve la carta que se encuentra en el tope del mazo,
+        Remueve la carta que se encuentra en el frente del mazo,
         y la devuelve. Dependiendo del estado, estará Boca arriba,
         o Boca abajo.
 
         Parameters
         ----------
-        estadoCara : class, opcional
-            Si los jugadores están en guerra, se deja la carta
-            boca abajo, sino se recibe como parámetro "Boca arriba".
+        estado_cara : class, opcional
+            Si los jugadores están en guerra, se juega la carta
+            "Boca abajo", sino, se recibe como parámetro "Boca arriba".
             Por defecto la cara de la carta es "Boca abajo".
 
         Returns
         -------
-        cartaJugada : class
+        carta_jugada : class
             Retorna la carta que se jugó.
 
         '''
-        cartaJugada = self.mazo.removerFinal()
-        cartaJugada.estadoCara = estadoCara
+        carta_jugada = self.mazo.remover_frente()
+        carta_jugada._cara = estado_cara
         
-        return cartaJugada
+        return carta_jugada
     
-    def jugador_gana(self, cartasGanadas):
-        self.mazo
+    def ganar_carta(self, carta_ganada):
+        '''
+        Agrega al final del Mazo del jugador la carta que ganó.
+
+        Parameters
+        ----------
+        carta_ganada : class
+            Carta que ganada que se agregará al Mazo del jugador.
+
+        Returns
+        -------
+        None.
+
+        '''
+        self.mazo.agregar_final(carta_ganada._dato)
+
+    def sacar_carta(self):
+        '''
+        Remueve una carta del mazo.
+
+        Returns
+        -------
+        class
+            Retorna la carta que se removió.
+
+        '''
+        return self.mazo.remover_frente()
 
 
 
 # Pruebas locales
 
 if __name__ == "__main__":
+    
+    carta1 = Carta(palo="♥", numero=5, cara="Boca abajo")
+    print(carta1)
+    
+    carta2 = Carta(palo="♠", numero=10, cara="Boca arriba")
+    print(carta2)
     
     mazo = Mazo()
     mazoJ1 = Mazo()
@@ -72,16 +173,16 @@ if __name__ == "__main__":
     '''Crear Mazo'''
     
     valores = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
-    palos = ['♠', '♥', '♦', '♣']
+    palos = ['â ', 'â¥', 'â¦', 'â£']
     cartas = []     # Lista para guardar las cartas, mezclarlas y luego crear un mazo
-    jerarquia = 0   # Utilizo una jerarquía para comparar luego las cartas
+    jerarquia = 0   # Utilizo una jerarquÃÂ­a para comparar luego las cartas
         
-    # Asigno cada número a los 4 palos
+    # Asigno cada nÃÂºmero a los 4 palos
     for numero in valores:
-        jerarquia+=1    # Aumento la jerarquía por cada iteración
+        jerarquia+=1    # Aumento la jerarquÃÂ­a por cada iteraciÃÂ³n
         
         for palo in palos:
-            carta = Carta(palo, numero, jerarquia, "Boca abajo")  # Creo una carta y le paso los parámetros correspondientes
+            carta = Carta(palo, numero, jerarquia, "Boca arriba")  # Creo una carta y le paso los parÃÂ¡metros correspondientes
             cartas.append(carta)    # Agrego la carta a la lista de cartas para crear luego el mazo
         
     rd.shuffle(cartas)      # Mezclo las cartas

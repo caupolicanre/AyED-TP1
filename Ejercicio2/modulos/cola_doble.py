@@ -1,4 +1,5 @@
-from LDE import ListaDobleEnlazada
+# Importo la LDE para inicializar la Cola Doble
+from Ejercicio1.modulos.LDE import ListaDobleEnlazada
 
 class ColaDoble():
     def  __init__(self):
@@ -6,7 +7,7 @@ class ColaDoble():
         
     def tamanio(self):
         '''
-        
+        Método para conocer el tamaño de la Cola Doble.
 
         Returns
         -------
@@ -18,7 +19,7 @@ class ColaDoble():
     
     def __str__(self):
         '''
-        
+        Muestra todos los Nodos de la Cola Doble.
 
         Returns
         -------
@@ -27,31 +28,36 @@ class ColaDoble():
             de la Cola Doble.
 
         '''
-        return self.items.__str__()
+        lista = [str(nodo) for nodo in self]
+        return str(lista)
     
     def __iter__(self):
+        '''
+        Método para iterar la Cola Doble.
+        '''
         return iter(self.items)
     
     def esta_vacia(self):
         '''
-        Comprueba si el tamaño de la Lista es igual a 0.
+        Comprueba si el tamaño de la Cola Doble
+        es igual a 0.
         
         Returns
         -------
         boolean
-            Devuelve True si la Lista está vacía.
+            Devuelve True si la Cola Doble está vacía.
         
         '''
         return self.items.esta_vacia()
     
     
-    def agregarFrente(self,item):
+    def agregar_frente(self, item):
         '''
         Agrega un nuevo ítem al frente de la Cola Doble.
         
         Parameters
         ----------
-        items : any type
+        item : any type
             Dato que se va a almacenar en un nuevo Nodo.
        
         Returns
@@ -62,7 +68,7 @@ class ColaDoble():
         return self.items.anexar(item)
     
     
-    def agregarFinal(self,item):
+    def agregar_final(self, item):
         '''
         Agrega un nuevo ítem al final de la Cola Doble.
        
@@ -73,35 +79,35 @@ class ColaDoble():
         
         Returns
         -------
-       
         None.
         
         ''' 
         return self.items.agregar(item)
     
     
-    def removerFrente(self):
-        
+    def remover_frente(self):
         ''' 
-         Elimina y devuelve el ítem del frente de la Cola Doble.
+        Elimina el ítem del frente de la Cola Doble 
+        y lo devuelve.
         
-         Returns
-         -------
-         temp : reference
-             Retorna el ítem extraido de la Cola Doble.
+        Returns
+        -------
+        temp : reference
+            Retorna el ítem extraido de la Cola Doble.
              
         '''
         return self.items.extraer(self.items.tamanio-1)
     
     
-    def removerFinal(self):
+    def remover_final(self):
        ''' 
-        Elimina y devuelve el ítem del final de la Cola Doble.
+       Elimina el ítem del final de la Cola Doble 
+       y lo devuelve.
        
-        Returns
-        -------
-        temp : reference
-            Retorna el ítem extraido de la Cola Doble.
+       Returns
+       -------
+       temp : reference
+           Retorna el ítem extraido de la Cola Doble.
             
        '''
        return self.items.extraer(0)    
@@ -113,15 +119,15 @@ if __name__=='__main__':
     
     pruebaColaDoble= ColaDoble()
     
-    pruebaColaDoble.agregarFinal(25)
-    pruebaColaDoble.agregarFinal(6)
-    pruebaColaDoble.agregarFrente(8)
+    pruebaColaDoble.agregar_final(25)
+    pruebaColaDoble.agregar_final(6)
+    pruebaColaDoble.agregar_frente(8)
     
     print(pruebaColaDoble)
-    print(pruebaColaDoble.removerFinal())
+    print(pruebaColaDoble.remover_final())
     
     print(pruebaColaDoble)
-    print(pruebaColaDoble.removerFrente())
+    print(pruebaColaDoble.remover_frente())
     
     print(pruebaColaDoble)
     
