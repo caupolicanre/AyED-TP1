@@ -54,23 +54,14 @@ class Nodo:
     def __repr__(self):
         return str(self.dato)
     
-    # def __lt__(self, other: Nodo()):
-    #     if self._dato < other._dato:
-    #         True
-    #     else:
-    #         False
+    def __lt__(self, other: Nodo()):
+        return self._dato < other._dato
     
-    # def __gt__(self, other: Nodo()):
-    #     if self._dato > other._dato:
-    #         True
-    #     else:
-    #         False
+    def __gt__(self, other: Nodo()):
+        return self._dato > other._dato
 
-    # def __eq__(self, other: Nodo()):
-    #     if self._dato == other._dato:
-    #         True
-    #     else:
-    #         False
+    def __eq__(self, other: Nodo()):
+        return self._dato == other._dato
     
     def __getitem__(self, indice):
         return self.dato[indice]
