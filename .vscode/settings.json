@@ -1,9 +1,0 @@
-﻿{
-    // Acá se agregan las carpetas de los proyectos del workspace
-
-    "python.analysis.extraPaths": [
-        "./Ejercicio1",
-        "./Ejercicio2",
-	"./Ejercicio3"
-    ]
-}
